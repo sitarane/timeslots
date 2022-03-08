@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root "pages#home"
   resource :users, except: :index
   resource :sessions, only: [:new, :create, :destroy]
+  resource :password, only: [:edit]
 end

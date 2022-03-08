@@ -1,0 +1,14 @@
+<h1>Edit Password</h1>
+<%= form_with model: Current.user, url: edit_password_path do |f| %>
+  <div>
+  <%= f.label 'password:'%><br>
+  <%= f.password_field :password %>
+  </div>
+  <div>
+  <%= f.label 'password_confirmation:'%><br>
+  <%= f.password_field :password_confirmation %>
+  </div>
+  <div>
+  <%= f.submit 'Update' %>
+  </div>
+<% end %>
