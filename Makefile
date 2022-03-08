@@ -10,3 +10,5 @@ restart:
 	docker-compose restart
 dbm:
 	docker-compose run --rm web rails db:migrate
+bundle:
+	docker-compose run --rm web bundle install
