@@ -7,11 +7,9 @@ services:
     image: postgres:14
     volumes:
       - db:/var/lib/postgresql/data
-    env_file: .env.development
+    env_file: .env
   web:
     build: .
-    # Redundant with Dockerfile. Remove if everything works
-    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/app
       - gems:/usr/local/bundle
@@ -19,4 +17,14 @@ services:
       - "3000:3000"
     depends_on:
       - db
-    env_file: .env.development
+    env_file: .env
+    # user: "${UID}:${GID}"
+  # test:
+  #   image: rails_web
+  #   volumes:
+  #     - .:/app
+  #     - gems:/usr/local/bundle
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     RAILS_ENV: test

@@ -1,8 +1,8 @@
 console:
 	docker-compose run --rm web rails console --sandbox
 bash:
-	docker-compose exec web bash
-up:
+	docker-compose run --rm web bash
+web:
 	docker-compose up -d
 down:
 	docker-compose down
@@ -16,3 +16,5 @@ tst:
 	docker-compose run --rm web rails test
 routes:
 	docker-compose run --rm web rails routes
+logs:
+	docker-compose logs -f
