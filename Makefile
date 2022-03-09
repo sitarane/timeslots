@@ -13,7 +13,7 @@ dbm:
 bundle:
 	docker-compose run --rm web bundle install
 tst:
-	docker-compose run --rm web rails test
+	docker-compose run --rm test rails test $(f)
 routes:
 	docker-compose run --rm web rails routes
 logs:

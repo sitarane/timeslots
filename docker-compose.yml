@@ -18,13 +18,13 @@ services:
     depends_on:
       - db
     env_file: .env
-    # user: "${UID}:${GID}"
-  # test:
-  #   image: rails_web
-  #   volumes:
-  #     - .:/app
-  #     - gems:/usr/local/bundle
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     RAILS_ENV: test
+  test:
+    image: rails_web
+    volumes:
+      - .:/app
+      - gems:/usr/local/bundle
+    depends_on:
+      - db
+    environment:
+      RAILS_ENV: test
+    env_file: .env
