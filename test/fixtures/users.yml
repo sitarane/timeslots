@@ -3,9 +3,9 @@
 one:
   name: John
   email: john@email.com
-  password_digest: johnspass
+  password_digest: $2a$12$OqCS.xsOXiLdzYrJoulr.eOt59KUfw7U/vv.hkEFBqxiXCJYpZpR6
 
 two:
   name: Jean
   email: jean@email.com
-  password_digest: jeanspass
+  password_digest: $2a$12$OqCS.xsOXiLdzYrJoulr.eOt59KUfw7U/vv.hkEFBqxiXCJYpZpR6

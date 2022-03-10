@@ -7,7 +7,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
   test "Create user" do
     post users_url params: { user: { name: "some name", email: "some@email.net", password: "somepass" } }
-    # maybe add check that the user was created?
     assert_redirected_to root_url
   end
 end
