@@ -18,6 +18,8 @@ services:
     depends_on:
       - db
     env_file: .env
+    stdin_open: true
+    tty: true
   test:
     image: rails_web
     volumes:

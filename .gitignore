@@ -30,5 +30,6 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-# Docker secrets
+# Added manually
 .env
+.byebug_history

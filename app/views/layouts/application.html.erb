@@ -13,8 +13,13 @@
 
   <body>
     <nav>
-      <%= link_to 'Sign up', new_users_path  %>
-      <%= link_to 'Log in', new_sessions_path  %>
+      <%= link_to('Home', root_path) unless controller.action_name == "home" %>
+      <% if Current.user %>
+        <%= link_to 'Log out', logout_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Sign up', new_users_path  %>
+        <%= link_to 'Log in', new_sessions_path  %>
+      <% end %>
     </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
