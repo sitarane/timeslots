@@ -2,7 +2,7 @@ require "test_helper"
 
 class PasswordsControllerTest < ActionDispatch::IntegrationTest
 
-  # Make a navigation that allows playing with passwords and then come back
+  # Figure out how to set session variables in test (log in users)
 
   # test 'New password' do
   #   Current.user = User.find_by(email: 'john@email.com')
