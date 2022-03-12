@@ -30,3 +30,5 @@ services:
     environment:
       RAILS_ENV: test
     env_file: .env
+    stdin_open: true
+    tty: true
