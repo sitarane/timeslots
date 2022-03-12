@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resource :users, except: :index
   resource :sessions, only: [:new, :create, :destroy]
   resource :password, only: [:edit]
+  resource :password_reset, only: [:new, :edit, :update]
 
   get 'signup', to: 'users#new'
   get 'login', to: 'sessions#new'
