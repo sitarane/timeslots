@@ -20,6 +20,10 @@ services:
     env_file: .env
     stdin_open: true
     tty: true
+  maildev:
+    image: maildev/maildev
+    ports:
+      - "1080:80"
   test:
     image: rails_web
     volumes:
