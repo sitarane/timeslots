@@ -1,4 +1,4 @@
-sandconsole:
+sandbox:
 	docker-compose run --rm web rails console --sandbox
 console:
 	docker-compose run --rm web rails console

@@ -19,7 +19,7 @@ class PasswordResetsController < ApplicationController
     # updates user's password
     @user = User.find_signed!(params[:token], purpose: 'password_reset')
     if @user.update(password_params)
-      redirect_to sign_in_path, notice: 'Your password was reset successfully. Please sign in'
+      redirect_to login_path, notice: 'Your password was reset successfully. Please sign in'
       else
       render :edit
     end
