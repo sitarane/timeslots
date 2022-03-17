@@ -5,6 +5,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get new_users_url
     assert_response :success
     assert_select 'form'
+    assert_select 'div a', "I already have an account"
   end
   test "Create user" do
     post users_url params: { user: { name: "some name", email: "some@email.net", password: "somepass" } }
