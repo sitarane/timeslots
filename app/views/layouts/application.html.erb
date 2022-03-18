@@ -20,6 +20,11 @@
         <%= link_to 'Sign up', new_users_path  %>
         <%= link_to 'Log in', new_sessions_path  %>
       <% end %>
+      <% if I18n.locale == :en %>
+        <%= link_to 'DE', { locale: :de }  %>
+      <% else %>
+        <%= link_to 'EN', { locale: :en }  %>
+      <%end%>
     </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
