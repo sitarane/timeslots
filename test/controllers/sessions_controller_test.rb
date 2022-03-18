@@ -9,7 +9,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
   test 'log in registered user' do
     post sessions_url params: { email: 'john@email.com', password: 'password' }
-    assert_redirected_to root_url
+    assert_redirected_to root_url(locale: :en)
   end
   test "don't log in non-existing user" do
     post sessions_url params: { email: 'not@exist.com', password: 'whatever'  }

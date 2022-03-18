@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   get '/:locale', to: 'pages#home'
   root 'pages#home'
-  scope "/:locale" do
+  scope "(:locale)", locale: /en|de/ do
     resource :users, except: :index
     resource :sessions, only: [:new, :create, :destroy]
     resource :password, only: [:edit]
