@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
   before_action :set_current_user
   around_action :switch_locale
   def set_current_user
