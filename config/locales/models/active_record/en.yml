@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    models:
+      user: User
+      slot: Slot
+    attributes:
+      user:
+        name: Name
+        email: Email
+      slot:
+        name: Name
+        start_time: Start time
