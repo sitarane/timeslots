@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>App</title>
+    <title><%= t(:app_name) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,12 +13,12 @@
 
   <body>
     <nav>
-      <%= link_to('Home', root_path) unless controller.action_name == "home" %>
+      <%= link_to(t(:home), root_path) unless controller.action_name == "home" %>
       <% if Current.user %>
-        <%= link_to 'Log out', logout_path, method: :delete %>
+        <%= link_to t(:log_out), logout_path, method: :delete %>
       <% else %>
-        <%= link_to 'Sign up', new_users_path  %>
-        <%= link_to 'Log in', new_sessions_path  %>
+        <%= link_to t(:sign_up), new_users_path  %>
+        <%= link_to t(:log_in), new_sessions_path  %>
       <% end %>
       <% if I18n.locale == :en %>
         <%= link_to 'DE', { locale: :de }  %>
