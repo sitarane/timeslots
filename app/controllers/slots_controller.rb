@@ -3,7 +3,8 @@ class SlotsController < ApplicationController
 
   # GET /slots or /slots.json
   def index
-    @slots = Slot.all
+    show_date = params.fetch(:start_date, Date.today).to_date
+    @slots = Slot.where(start_time: show_date.beginning_of_month.beginning_of_week..show_date.end_of_month.end_of_week)
   end
 
   # GET /slots/1 or /slots/1.json
