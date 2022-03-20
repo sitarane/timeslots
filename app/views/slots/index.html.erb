@@ -2,13 +2,14 @@
 
 <h1>Slots</h1>
 
-<div id="slots">
-  <% @slots.each do |slot| %>
-    <%= render slot %>
-    <p>
-      <%= link_to "Show this slot", slot %>
-    </p>
+<%= month_calendar(events: @slots) do |date, slots| %>
+  <%= date %>
+
+  <% slots.each do |slot| %>
+    <div>
+      <%= link_to slot.name, slot_path(slot) %>
+    </div>
   <% end %>
-</div>
+<% end %>
 
 <%= link_to "New slot", new_slot_path %>

@@ -13,7 +13,8 @@
 
   <body>
     <nav>
-      <%= link_to(t(:home), root_path) unless controller.action_name == "home" %>
+      <%= link_to t(:home), root_path unless action_name == "home" %>
+      <%= link_to t(:calendar), slots_path unless controller_name == "slots" && action_name == "index" %>
       <% if Current.user %>
         <%= link_to t(:log_out), logout_path, method: :delete %>
       <% else %>
