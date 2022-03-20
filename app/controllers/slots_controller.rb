@@ -21,7 +21,6 @@ class SlotsController < ApplicationController
 
   # POST /slots or /slots.json
   def create
-    debugger
     @slot = Slot.new(slot_params.merge(user_id: Current.user.id))
 
     respond_to do |format|
