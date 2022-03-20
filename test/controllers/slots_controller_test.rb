@@ -8,6 +8,7 @@ class SlotsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get slots_url(locale: :en)
     assert_response :success
+    assert_select 'table'
   end
 
   test "should get new" do
