@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  has_many :slots, dependent: :destroy
   # adds virtual attributes for authentication
   has_secure_password
   # validates email

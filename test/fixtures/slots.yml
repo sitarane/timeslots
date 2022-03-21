@@ -4,10 +4,8 @@ one:
   name: MyString
   description: MyString
   start_time: 2022-03-19 14:30:59
-  user: one
 
 two:
   name: MyString
   description: MyString
   start_time: 2022-03-19 14:30:59
-  user: two

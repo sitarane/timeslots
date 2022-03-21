@@ -13,16 +13,19 @@ class SlotsController < ApplicationController
 
   # GET /slots/new
   def new
+    authorize Slot
     @slot = Slot.new
   end
 
   # GET /slots/1/edit
   def edit
+    authorize Slot
   end
 
   # POST /slots or /slots.json
   def create
-    @slot = Slot.new(slot_params.merge(user_id: Current.user.id))
+    @slot = Slot.new(slot_params)
+    authorize @slot
 
     respond_to do |format|
       if @slot.save
@@ -37,6 +40,7 @@ class SlotsController < ApplicationController
 
   # PATCH/PUT /slots/1 or /slots/1.json
   def update
+    authorize @slot
     respond_to do |format|
       if @slot.update(slot_params)
         format.html { redirect_to slot_url(@slot), notice: "Slot was successfully updated." }
@@ -50,6 +54,7 @@ class SlotsController < ApplicationController
 
   # DELETE /slots/1 or /slots/1.json
   def destroy
+    authorize @slot
     @slot.destroy
 
     respond_to do |format|
@@ -66,6 +71,6 @@ class SlotsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def slot_params
-      params.require(:slot).permit(:name, :description, :start_time, :user_id)
+      params.require(:slot).permit(:name, :description, :start_time)
     end
 end
