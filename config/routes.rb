@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   scope "(:locale)", locale: /en|de/ do
     resource :users, except: :index
+    resources :calendars
     resources :slots
     resource :sessions, only: [:new, :create, :destroy]
     resource :password, only: [:edit]
