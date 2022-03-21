@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_21_205038) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_21_211649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "calendar_assignments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "calendar_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_calendar_assignments_on_calendar_id"
+    t.index ["user_id"], name: "index_calendar_assignments_on_user_id"
+  end
 
   create_table "calendars", force: :cascade do |t|
     t.string "name"
@@ -21,12 +30,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_21_205038) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "calendars_users", id: false, force: :cascade do |t|
+    t.bigint "calendar_id"
+    t.bigint "user_id"
+    t.index ["calendar_id"], name: "index_calendars_users_on_calendar_id"
+    t.index ["user_id"], name: "index_calendars_users_on_user_id"
+  end
+
   create_table "slots", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "start_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "calendar_id", null: false
+    t.index ["calendar_id"], name: "index_slots_on_calendar_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,4 +55,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_21_205038) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "slots", "calendars"
 end

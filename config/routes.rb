@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /en|de/ do
     resource :users, except: :index
     resources :calendars
-    resources :slots
+      resources :slots
     resource :sessions, only: [:new, :create, :destroy]
     resource :password, only: [:edit]
     resource :password_reset, only: [:new, :edit, :update, :create]

@@ -1,4 +1,6 @@
 class Slot < ApplicationRecord
+  belongs_to :calendar
+
   validates :name, presence: true
   validates :start_time, presence: true
   validate :future_start
