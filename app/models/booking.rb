@@ -3,8 +3,8 @@ class Booking < ApplicationRecord
   belongs_to :slot
 
   enum score: {
-    cant: 0,
+    cannot: 0,
     can: 1,
-    will: 2
+    want: 2
   }
 end
