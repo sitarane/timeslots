@@ -2,7 +2,7 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   test "Empty user invalid" do
-    user = User.new
+    user = User.new(calendars: [calendars(:one)])
     assert_not user.valid?
   end
   test "Valid user can be saved" do

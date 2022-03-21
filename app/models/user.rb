@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_and_belongs_to_many :calendars
   has_many :slots
+  has_many :bookings
+
   # adds virtual attributes for authentication
   has_secure_password
   # validates email
