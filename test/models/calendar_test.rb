@@ -4,6 +4,10 @@ class CalendarTest < ActiveSupport::TestCase
   def setup
     @calendar = calendars(:one)
   end
+  test '#user' do
+    assert @calendar.user
+    assert_not calendars(:two).user
+  end
   test "Calendar invalid without a user" do
     calendar = Calendar.new(
       name: "a calendar",

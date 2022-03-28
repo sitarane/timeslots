@@ -3,4 +3,9 @@ class Calendar < ApplicationRecord
   has_many :slots, dependent: :destroy
 
   validates :users, presence: true
+
+  def user
+    return false if users.count != 1
+    return users.first
+  end
 end
