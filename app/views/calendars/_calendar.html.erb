@@ -3,7 +3,7 @@
     <strong><%= calendar.name %></strong>
   </p>
 
-  <%= month_calendar(events: @calendar.slots) do |date, slots| %>
+  <%= month_calendar(events: calendar.slots) do |date, slots| %>
     <%= date %>
 
     <% slots.each do |slot| %>
