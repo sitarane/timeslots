@@ -24,6 +24,7 @@ class CalendarsController < ApplicationController
   # POST /calendars or /calendars.json
   def create
     @calendar = Calendar.new(calendar_params)
+    @calendar.users = [ Current.user ]
     authorize @calendar
 
     respond_to do |format|
