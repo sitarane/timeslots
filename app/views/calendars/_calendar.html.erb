@@ -1,11 +1,19 @@
 <div id="<%= dom_id calendar %>">
   <p>
-    <strong>Name:</strong>
-    <%= calendar.name %>
+    <strong><%= calendar.name %></strong>
   </p>
 
+  <%= month_calendar(events: @calendar.slots) do |date, slots| %>
+    <%= date %>
+
+    <% slots.each do |slot| %>
+      <div>
+        <%= link_to slot.name, slot_path(slot) %>
+      </div>
+    <% end %>
+  <% end %>
+
   <p>
-    <strong>Description:</strong>
     <%= calendar.description %>
   </p>
 
