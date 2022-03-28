@@ -12,16 +12,19 @@ class CalendarsController < ApplicationController
 
   # GET /calendars/new
   def new
+    authorize Calendar
     @calendar = Calendar.new
   end
 
   # GET /calendars/1/edit
   def edit
+    authorize @calendar
   end
 
   # POST /calendars or /calendars.json
   def create
     @calendar = Calendar.new(calendar_params)
+    authorize @calendar
 
     respond_to do |format|
       if @calendar.save
@@ -36,6 +39,7 @@ class CalendarsController < ApplicationController
 
   # PATCH/PUT /calendars/1 or /calendars/1.json
   def update
+    authorize @calendar
     respond_to do |format|
       if @calendar.update(calendar_params)
         format.html { redirect_to calendar_url(@calendar), notice: "Calendar was successfully updated." }
@@ -49,6 +53,7 @@ class CalendarsController < ApplicationController
 
   # DELETE /calendars/1 or /calendars/1.json
   def destroy
+    authorize @calendar
     @calendar.destroy
 
     respond_to do |format|
