@@ -4,7 +4,14 @@ class CalendarTest < ActiveSupport::TestCase
   def setup
     @calendar = calendars(:one)
   end
-  test "Calendar can be saved" do
+  test "Calendar invalid without a user" do
+    calendar = Calendar.new(
+      name: "a calendar",
+      description: "bla bla bla description"
+    )
+    assert_not calendar.valid?
+  end
+  test "Valid calendar can be saved" do
     calendar = Calendar.new(
       name: "a calendar",
       description: "bla bla bla description",
