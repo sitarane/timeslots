@@ -1,21 +1,29 @@
-<div id="<%= dom_id calendar %>">
-  <p>
-    <strong><%= calendar.name %></strong>
-  </p>
+<div id="calendar">
+  <h1>
+    <%= calendar.name %>
+  </h1>
 
   <%= month_calendar(events: calendar.slots) do |date, slots| %>
     <%= date.day %>
 
     <% slots.each do |slot| %>
-      <div>
-        <%= link_to l(slot.start_time, format: :time), calendar_slot_path(calendar, slot) %>
-      </div>
+      <% if Current.user %>
+        <div>
+          <%= link_to l(slot.start_time, format: :time), calendar_slot_path(calendar, slot) %>
+        </div>
+      <% else %>
+        <div>
+          <%= l(slot.start_time, format: :time) %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 
-  <div>
-    <%= link_to 'Add a slot', new_calendar_slot_path(calendar) %>
-  </div>
+  <% if @editor %>
+    <div>
+      <%= link_to 'Add a slot', new_calendar_slot_path(calendar) %>
+    </div>
+  <% end %>
 
   <% if calendar.description %>
     <p>

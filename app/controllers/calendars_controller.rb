@@ -8,11 +8,8 @@ class CalendarsController < ApplicationController
 
   # GET /calendars/1 or /calendars/1.json
   def show
-    if @calendar.users.include?(Current.user)
-      @editor = true
-    else
-      @editor = false
-    end
+    flash.now[:notice] = I18n.t :please_login unless Current.user
+    @editor = @calendar.users.include?(Current.user)
   end
 
   # GET /calendars/new

@@ -1,12 +1,13 @@
 <h1>Calendars</h1>
 
-<div id="calendars">
+<ul id="calendars">
   <% @calendars.each do |calendar| %>
-    <%= render calendar %>
-    <p>
-      <%= link_to "Show this calendar", calendar %>
-    </p>
+    <li>
+      <%= link_to calendar.name, calendar %>
+    </li>
   <% end %>
-</div>
+</ul>
 
-<%= link_to "New calendar", new_calendar_path %>
+<% if Current.user %>
+  <%= link_to "New calendar", new_calendar_path %>
+<% end %>
