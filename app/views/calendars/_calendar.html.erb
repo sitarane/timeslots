@@ -8,10 +8,7 @@
 
     <% slots.each do |slot| %>
       <div>
-        <%= l slot.start_time, format: :time %>
-      </div>
-      <div>
-        <%= link_to slot.name, calendar_slot_path(calendar, slot) %>
+        <%= link_to l(slot.start_time, format: :time), calendar_slot_path(calendar, slot) %>
       </div>
     <% end %>
   <% end %>
@@ -20,8 +17,10 @@
     <%= link_to 'Add a slot', new_calendar_slot_path(calendar) %>
   </div>
 
-  <p>
-    <%= calendar.description %>
-  </p>
+  <% if calendar.description %>
+    <p>
+      <%= calendar.description %>
+    </p>
+  <% end %>
 
 </div>
