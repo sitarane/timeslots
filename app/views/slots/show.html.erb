@@ -1,8 +1,23 @@
 <%= render @slot %>
 
-<div>
-  <%= link_to "Edit this slot", edit_calendar_slot_path(@slot) %> |
-  <%= link_to "Back to calendar", calendar_path(@slot.calendar) %>
+<%= form_with model: @booking do |form| %>
+  <%= form.radio_button :score, :cant %>
+  <%= form.label :score_cant, t(:cant), style: "display: block" %>
+  <%= form.radio_button :score, :can %>
+  <%= form.label :score_cant, t(:can), style: "display: block" %>
+  <%= form.radio_button :score, :want %>
+  <%= form.label :score_cant, t(:want), style: "display: block" %>
 
-  <%= button_to "Destroy this slot", calendar_slot_path, method: :delete %>
-</div>
+  <div>
+    <%= form.submit t(:request_slot) %>
+  </div>
+<% end %>
+
+<% if @editor %>
+  <div>
+    <%= link_to "Edit this slot", edit_calendar_slot_path(@slot) %> |
+    <%= link_to "Back to calendar", calendar_path(@slot.calendar) %>
+
+    <%= button_to "Destroy this slot", calendar_slot_path, method: :delete %>
+  </div>
+<% end %>

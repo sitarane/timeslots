@@ -1,7 +1,6 @@
 class Slot < ApplicationRecord
   belongs_to :calendar
   has_many :bookings, dependent: :destroy
-  has_many :users, through: :bookings, as: :guest
 
   validates :name, presence: true
   validates :start_time, presence: true

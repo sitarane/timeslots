@@ -15,7 +15,6 @@ class BookingTest < ActiveSupport::TestCase
   end
   test "User can create booking" do
     booking = @user.bookings.new(slot: @slot, score: 0)
-    assert booking.valid?
     assert booking.save
   end
   test "Slot can't create userless booking" do
@@ -28,7 +27,6 @@ class BookingTest < ActiveSupport::TestCase
   end
   test "Slot can create new booking" do
     booking = @slot.bookings.new(user: @user, score: 0)
-    assert booking.valid?
     assert booking.save
   end
 end

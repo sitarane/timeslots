@@ -10,6 +10,8 @@ class SlotsController < ApplicationController
 
   # GET /slots/1 or /slots/1.json
   def show
+    @booking = set_booking
+    @editor = @slot.calendar.users.include? Current.user
   end
 
   # GET /slots/new
@@ -74,6 +76,12 @@ class SlotsController < ApplicationController
 
     def set_calendar
       @calendar = Calendar.find(params[:calendar_id])
+    end
+
+    def set_booking
+      existing = Booking.find_by slot_id: @slot.id, user_id: Current.user.id
+      return existing if existing
+      return @slot.bookings.new(user: Current.user)
     end
 
     # Only allow a list of trusted parameters through.
