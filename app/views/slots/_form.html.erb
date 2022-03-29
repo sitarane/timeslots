@@ -1,4 +1,4 @@
-<%= form_with(model: slot) do |form| %>
+<%= form_with model: [calendar, slot] do |form| %>
   <% if slot.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(slot.errors.count, "error") %> prohibited this slot from being saved:</h2>

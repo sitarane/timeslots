@@ -1,10 +1,10 @@
 <h1>Editing slot</h1>
 
-<%= render "form", slot: @slot %>
+<%= render "form", calendar: @slot.calendar, slot: @slot %>
 
 <br>
 
 <div>
-  <%= link_to "Show this slot", @slot %> |
-  <%= link_to "Back to slots", slots_path %>
+  <%= link_to "Show this slot", calendar_slot_path(@slot) %> |
+  <%= link_to "Back to calendar", calendar_path(@slot.calendar) %>
 </div>

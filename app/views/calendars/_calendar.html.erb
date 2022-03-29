@@ -8,10 +8,14 @@
 
     <% slots.each do |slot| %>
       <div>
-        <%= link_to slot.name, slot_path(slot) %>
+        <%= link_to slot.name, calendar_slot_path(calendar, slot) %>
       </div>
     <% end %>
   <% end %>
+
+  <div>
+    <%= link_to 'Add a slot', new_calendar_slot_path(calendar) %>
+  </div>
 
   <p>
     <%= calendar.description %>

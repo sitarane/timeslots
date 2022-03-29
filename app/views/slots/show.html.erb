@@ -3,8 +3,8 @@
 <%= render @slot %>
 
 <div>
-  <%= link_to "Edit this slot", edit_slot_path(@slot) %> |
-  <%= link_to "Back to slots", slots_path %>
+  <%= link_to "Edit this slot", edit_calendar_slot_path(@slot) %> |
+  <%= link_to "Back to calendar", calendar_path(@slot.calendar) %>
 
-  <%= button_to "Destroy this slot", @slot, method: :delete %>
+  <%= button_to "Destroy this slot", calendar_slot_path, method: :delete %>
 </div>

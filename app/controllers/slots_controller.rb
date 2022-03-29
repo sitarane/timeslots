@@ -1,5 +1,6 @@
 class SlotsController < ApplicationController
   before_action :set_slot, only: %i[ show edit update destroy ]
+  before_action :set_calendar, only: [:new, :create]
 
   # GET /slots or /slots.json
   def index
@@ -14,7 +15,7 @@ class SlotsController < ApplicationController
   # GET /slots/new
   def new
     authorize Slot
-    @slot = Slot.new
+    @slot = @calendar.slots.new
   end
 
   # GET /slots/1/edit
@@ -25,11 +26,12 @@ class SlotsController < ApplicationController
   # POST /slots or /slots.json
   def create
     @slot = Slot.new(slot_params)
+    @slot.calendar = @calendar
     authorize @slot
 
     respond_to do |format|
       if @slot.save
-        format.html { redirect_to slot_url(@slot), notice: "Slot was successfully created." }
+        format.html { redirect_to calendar_slot_url(@slot.calendar, @slot), notice: "Slot was successfully created." }
         format.json { render :show, status: :created, location: @slot }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +45,7 @@ class SlotsController < ApplicationController
     authorize @slot
     respond_to do |format|
       if @slot.update(slot_params)
-        format.html { redirect_to slot_url(@slot), notice: "Slot was successfully updated." }
+        format.html { redirect_to calendar_slot_url(@slot), notice: "Slot was successfully updated." }
         format.json { render :show, status: :ok, location: @slot }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,10 +57,11 @@ class SlotsController < ApplicationController
   # DELETE /slots/1 or /slots/1.json
   def destroy
     authorize @slot
+    calendar = @slot.calendar
     @slot.destroy
 
     respond_to do |format|
-      format.html { redirect_to slots_url, notice: "Slot was successfully destroyed." }
+      format.html { redirect_to calendar_url(calendar), notice: "Slot was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -67,6 +70,10 @@ class SlotsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_slot
       @slot = Slot.find(params[:id])
+    end
+
+    def set_calendar
+      @calendar = Calendar.find(params[:calendar_id])
     end
 
     # Only allow a list of trusted parameters through.
