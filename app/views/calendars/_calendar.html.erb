@@ -4,9 +4,12 @@
   </p>
 
   <%= month_calendar(events: calendar.slots) do |date, slots| %>
-    <%= date %>
+    <%= date.day %>
 
     <% slots.each do |slot| %>
+      <div>
+        <%= l slot.start_time, format: :time %>
+      </div>
       <div>
         <%= link_to slot.name, calendar_slot_path(calendar, slot) %>
       </div>
