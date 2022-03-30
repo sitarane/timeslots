@@ -1,15 +1,15 @@
 <%= render @slot %>
 
 <%= form_with model: @booking do |form| %>
-  <%= form.radio_button :score, :cant %>
-  <%= form.label :score_cant, t(:cant), style: "display: block" %>
+  <%= form.radio_button :score, :cannot %>
+  <%= form.label :score_cannot, t(:cannot), style: "display: block" %>
   <%= form.radio_button :score, :can %>
-  <%= form.label :score_cant, t(:can), style: "display: block" %>
+  <%= form.label :score_can, t(:can), style: "display: block" %>
   <%= form.radio_button :score, :want %>
-  <%= form.label :score_cant, t(:want), style: "display: block" %>
-
+  <%= form.label :score_want, t(:want), style: "display: block" %>
+  <%= form.hidden_field :slot_id, value: @slot.id %>
   <div>
-    <%= form.submit t(:request_slot) %>
+    <%= form.submit %>
   </div>
 <% end %>
 

@@ -8,4 +8,7 @@ class SlotPolicy < ApplicationPolicy
   def update?
     create?
   end
+  def show?
+    !!user
+  end
 end

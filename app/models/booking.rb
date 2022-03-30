@@ -4,9 +4,5 @@ class Booking < ApplicationRecord
 
   validates :score, presence: true
 
-  enum score: {
-    cannot: 0,
-    can: 1,
-    want: 2
-  }
+  enum score: [:cannot, :can, :want]
 end

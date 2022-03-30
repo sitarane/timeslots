@@ -10,6 +10,7 @@ class SlotsController < ApplicationController
 
   # GET /slots/1 or /slots/1.json
   def show
+    authorize @slot
     @booking = set_booking
     @editor = @slot.calendar.users.include? Current.user
   end

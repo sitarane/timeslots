@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  resource :bookings
-  # Defines the root path route ("/")
+  resources :bookings
   get '/:locale', to: 'pages#home'
   root 'pages#home'
   scope "(:locale)", locale: /en|de/ do
