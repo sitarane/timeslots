@@ -26,7 +26,7 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to calendar_slot_url(@slot.calendar, @slot), notice: "Booking was successfully created." }
+        format.html { redirect_to calendar_url(@slot.calendar), notice: "Booking was successfully created." }
         format.json { render :show, status: :created, location: @booking }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class BookingsController < ApplicationController
     @booking = Booking.find_by slot_id: @slot.id, user_id: Current.user.id
     respond_to do |format|
       if @booking.update(booking_params)
-        format.html { redirect_to calendar_slot_url(@slot.calendar, @slot), notice: "Booking was successfully updated." }
+        format.html { redirect_to calendar_url(@slot.calendar), notice: "Booking was successfully updated." }
         format.json { render :show, status: :ok, location: @booking }
       else
         format.html { render :edit, status: :unprocessable_entity }
