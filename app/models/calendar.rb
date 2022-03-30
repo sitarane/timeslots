@@ -3,6 +3,7 @@ class Calendar < ApplicationRecord
   has_many :slots, dependent: :destroy
 
   validates :users, presence: true
+  validates :advance_warning, numericality: :only_integer
 
   def user
     return false if users.count != 1
