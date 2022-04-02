@@ -66,6 +66,33 @@ class CalendarsController < ApplicationController
   end
 
   private
+
+    def assign_slots
+      @score_board = @calendar.score_board
+
+      @want_assignation = Hash.new
+      until @score_board == old_board
+        old_board = @score_board
+        @want_assignation.merge(want_assignation(@score_board))
+      end
+
+      unless @score_board.empty?
+        @cannot_assignation = Hash.new
+        until @score_board == old_board
+          old_board = @score_board
+          @cannot_assignation.merge(cannot_assignation(@score_board))
+        end
+      end
+
+      unless @score_board.empty?
+        @calculated_assignation = Hash.new
+        until @score_board == old_board
+        # calculate
+        end
+      end
+
+      return @score_board.empty?
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_calendar
       @calendar = Calendar.find(params[:id])
