@@ -69,29 +69,83 @@ class CalendarsController < ApplicationController
 
     def assign_slots
       @score_board = @calendar.score_board
-
-      @want_assignation = Hash.new
+      assignations = Hash.new # slot => user
+      old_board = Hash.new
       until @score_board == old_board
         old_board = @score_board
-        @want_assignation.merge(want_assignation(@score_board))
+        assignations.merge(assign_first_pass)
+        return assignations if @score_board.empty?
+        assignations.merge(
+          helpers.assign_most_hated_to_someone_who_wants_it(@score_board)
+        )
+        return assignations if @score_board.empty?
       end
+      return false
+    end
 
-      unless @score_board.empty?
-        @cannot_assignation = Hash.new
-        until @score_board == old_board
-          old_board = @score_board
-          @cannot_assignation.merge(cannot_assignation(@score_board))
-        end
+    def assign_first_pass
+      assignations = Hash.new
+      old_board = Hash.new
+      until @score_board == old_board
+        old_board = @score_board
+        assignations.merge(assign_wanted_only_by_one)
+        return assignations if @score_board.empty?
+
+        assignations.merge(
+          helpers.assign_hated_by_all_minus_one(@score_board)
+        )
+        return assignations if @score_board.empty?
+
+        assignations.merge(
+          helpers.assign_most_wanted(@score_board)
+        )
+        return assignations if @score_board.empty?
       end
+      return assignations
+    end
 
-      unless @score_board.empty?
-        @calculated_assignation = Hash.new
-        until @score_board == old_board
-        # calculate
-        end
+    def assign_wanted_only_by_one
+      assignations = Hash.new
+      old_board = Hash.new
+      until @score_board == old_board
+        old_board = @score_board
+        assignations.merge(helpers.assign_wanted_only_by_one(@score_board))
+        return assignations if @score_board.empty?
       end
+      return assignations
+    end
 
-      return @score_board.empty?
+    def assign_hated_by_all_minus_one
+      assignations = Hash.new
+      old_board = Hash.new
+      until @score_board == old_board
+        old_board = @score_board
+        assignations.merge(helpers.assign_hated_by_all_minus_one(@score_board))
+        return assignations if @score_board.empty?
+      end
+      return assignations
+    end
+
+    def assign_most_wanted
+      assignations = Hash.new
+      old_board = Hash.new
+      until @score_board == old_board
+        old_board = @score_board
+        assignations.merge(helpers.assign_most_wanted(@score_board))
+        return assignations if @score_board.empty?
+      end
+      return assignations
+    end
+
+    def assign_most_hated_to_someone_who_wants_it
+      assignations = Hash.new
+      old_board = Hash.new
+      until @score_board == old_board
+        old_board = @score_board
+        assignations.merge(helpers.assign_most_hated_to_someone_who_wants_it(@score_board))
+        return assignations if @score_board.empty?
+      end
+      return assignations
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_calendar
