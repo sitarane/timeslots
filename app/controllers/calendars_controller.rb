@@ -10,6 +10,7 @@ class CalendarsController < ApplicationController
   def show
     flash.now[:notice] = I18n.t :please_login unless Current.user
     @editor = @calendar.users.include?(Current.user)
+    debugger
   end
 
   # GET /calendars/new
@@ -67,93 +68,44 @@ class CalendarsController < ApplicationController
 
   private
 
-    def assign_slots
-      @score_board = @calendar.score_board
-      assignations = Hash.new # slot => user
-      old_board = Hash.new
-      until @score_board == old_board
-        old_board = @score_board
-        assignations.merge(assign_first_pass)
-        return assignations if @score_board.empty?
-        assignations.merge(
-          helpers.assign_most_hated_to_someone_who_wants_it(@score_board)
-        )
-        return assignations if @score_board.empty?
-      end
-      return false
+  def assign_slots
+    @score_board = @calendar.score_board
+    assignations = Hash.new # slot => user
+    old_board = Hash.new
+    until @score_board == old_board
+      old_board = @score_board
+      assignations.merge(assign_first_pass)
+      return assignations if @score_board.empty?
+      assignations.merge(helpers.assign_most_hated_to_someone_who_wants_it(@score_board))
+      return assignations if @score_board.empty?
     end
+    return false
+  end
 
-    def assign_first_pass
-      assignations = Hash.new
-      old_board = Hash.new
-      until @score_board == old_board
-        old_board = @score_board
-        assignations.merge(assign_wanted_only_by_one)
-        return assignations if @score_board.empty?
+  def assign_first_pass
+    assignations = Hash.new
+    old_board = Hash.new
+    until @score_board == old_board
+      old_board = @score_board
+      assignations.merge(assign_wanted_only_by_one)
+      return assignations if @score_board.empty?
 
-        assignations.merge(
-          helpers.assign_hated_by_all_minus_one(@score_board)
-        )
-        return assignations if @score_board.empty?
+      assignations.merge(helpers.assign_hated_by_all_minus_one(@score_board))
+      return assignations if @score_board.empty?
 
-        assignations.merge(
-          helpers.assign_most_wanted(@score_board)
-        )
-        return assignations if @score_board.empty?
-      end
-      return assignations
+      assignations.merge(helpers.assign_most_wanted(@score_board))
+      return assignations if @score_board.empty?
     end
+    return assignations
+  end
 
-    def assign_wanted_only_by_one
-      assignations = Hash.new
-      old_board = Hash.new
-      until @score_board == old_board
-        old_board = @score_board
-        assignations.merge(helpers.assign_wanted_only_by_one(@score_board))
-        return assignations if @score_board.empty?
-      end
-      return assignations
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_calendar
+    @calendar = Calendar.find(params[:id])
+  end
 
-    def assign_hated_by_all_minus_one
-      assignations = Hash.new
-      old_board = Hash.new
-      until @score_board == old_board
-        old_board = @score_board
-        assignations.merge(helpers.assign_hated_by_all_minus_one(@score_board))
-        return assignations if @score_board.empty?
-      end
-      return assignations
-    end
-
-    def assign_most_wanted
-      assignations = Hash.new
-      old_board = Hash.new
-      until @score_board == old_board
-        old_board = @score_board
-        assignations.merge(helpers.assign_most_wanted(@score_board))
-        return assignations if @score_board.empty?
-      end
-      return assignations
-    end
-
-    def assign_most_hated_to_someone_who_wants_it
-      assignations = Hash.new
-      old_board = Hash.new
-      until @score_board == old_board
-        old_board = @score_board
-        assignations.merge(helpers.assign_most_hated_to_someone_who_wants_it(@score_board))
-        return assignations if @score_board.empty?
-      end
-      return assignations
-    end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_calendar
-      @calendar = Calendar.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def calendar_params
-      params.require(:calendar).permit(:name, :description, :advance_warning, :users)
-    end
+  # Only allow a list of trusted parameters through.
+  def calendar_params
+    params.require(:calendar).permit(:name, :description, :advance_warning, :users)
+  end
 end

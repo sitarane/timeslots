@@ -1,20 +1,25 @@
 module CalendarsHelper
+
   def assign_wanted_only_by_one(score_board)
     assigned = Hash.new
-    score_board.each do |slot, score_list|
-      want_count = 0
-      winner = 0
-      score_list.each do |guest, score|
-        if score > 0
-          want_count +=1
-          winner = guest
+    old_board = Hash.new
+    until score_board == old_board
+      old_board = score_board
+      score_board.each do |slot, score_list|
+        want_count = 0
+        winner = 0
+        score_list.each do |guest, score|
+          if score > 0
+            want_count +=1
+            winner = guest
+          end
         end
-      end
-      if want_count == 1 # We have a winner
-        assigned[slot] = winner
-        score_board.delete(slot)
-        score_board.each_value do |score_list|
-          score_list.delete(winner)
+        if want_count == 1 # We have a winner
+          assigned[slot] = winner
+          score_board.delete(slot)
+          score_board.each_value do |score_list|
+            score_list.delete(winner)
+          end
         end
       end
     end
