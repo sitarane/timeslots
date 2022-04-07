@@ -99,7 +99,7 @@ module CalendarsHelper
     if wanters
       winner = wanters.keys.sample
       assigned[most_hated_slot] = winner
-      puts "We're glad that guest #{winner} didn't hate slot #{slot}, because many did."
+      puts "We're glad that guest #{winner} didn't hate slot #{most_hated_slot}, because many did."
       score_board.delete(most_hated_slot)
       score_board.each_value do |score_list|
         score_list.delete(winner)
