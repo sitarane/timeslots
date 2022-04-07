@@ -29,11 +29,14 @@ class Calendar < ApplicationRecord
   end
 
   def score_board
+    puts 'Starting to build the score board'
     guest_list = guests # run once because expensive
     board = Hash.new
     slots.each do |slot|
       board[slot.id] = slot_score_list(slot, guest_list)
     end
+    puts 'Score board built:'
+    puts board
     board
   end
 

@@ -10,7 +10,6 @@ class CalendarsController < ApplicationController
   def show
     flash.now[:notice] = I18n.t :please_login unless Current.user
     @editor = @calendar.users.include?(Current.user)
-    debugger
   end
 
   # GET /calendars/new
@@ -74,9 +73,9 @@ class CalendarsController < ApplicationController
     old_board = Hash.new
     until @score_board == old_board
       old_board = @score_board
-      assignations.merge(assign_first_pass)
+      assignations.merge!(assign_first_pass)
       return assignations if @score_board.empty?
-      assignations.merge(helpers.assign_most_hated_to_someone_who_wants_it(@score_board))
+      assignations.merge!(helpers.assign_most_hated_to_someone_who_wants_it(@score_board))
       return assignations if @score_board.empty?
     end
     return false
@@ -87,13 +86,13 @@ class CalendarsController < ApplicationController
     old_board = Hash.new
     until @score_board == old_board
       old_board = @score_board
-      assignations.merge(assign_wanted_only_by_one)
+      assignations.merge!(helpers.assign_wanted_only_by_one(@score_board))
       return assignations if @score_board.empty?
 
-      assignations.merge(helpers.assign_hated_by_all_minus_one(@score_board))
+      assignations.merge!(helpers.assign_hated_by_all_minus_one(@score_board))
       return assignations if @score_board.empty?
 
-      assignations.merge(helpers.assign_most_wanted(@score_board))
+      assignations.merge!(helpers.assign_most_wanted(@score_board))
       return assignations if @score_board.empty?
     end
     return assignations
