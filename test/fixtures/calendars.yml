@@ -4,8 +4,10 @@ one:
   name: MyString
   description: MyText
   users: one
+  advance_warning: 2
 
 two:
   name: MyString
   description: MyText
   users: one, two
+  advance_warning: 2

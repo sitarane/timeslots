@@ -3,11 +3,11 @@
 one:
   name: Slot one
   description: Slot one description
-  start_time: 2022-03-19 14:30:59
+  start_time: <%= Time.zone.now + 5.days %>
   calendar: one
 
 two:
   name: Slot two
   description: Slot two description
-  start_time: 2022-03-19 14:30:59
+  start_time: <%= Time.zone.now + 3.days %>
   calendar: one

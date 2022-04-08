@@ -10,6 +10,7 @@ class CalendarsController < ApplicationController
   def show
     flash.now[:notice] = I18n.t :please_login unless Current.user
     @editor = @calendar.users.include?(Current.user)
+    @assignations = assign_slots
   end
 
   # GET /calendars/new

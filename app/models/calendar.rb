@@ -29,14 +29,11 @@ class Calendar < ApplicationRecord
   end
 
   def score_board
-    puts 'Starting to build the score board'
     guest_list = guests # run once because expensive
     board = Hash.new
     slots.each do |slot|
       board[slot.id] = slot_score_list(slot, guest_list) if slot.start_time > Time.now + advance_warning.days
     end
-    puts 'Score board built:'
-    puts board
     board
   end
 
