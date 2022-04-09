@@ -1,0 +1,5 @@
+class RemoveNameFromSlots < ActiveRecord::Migration[7.0]
+  def change
+    remove_column :slots, :name, :string
+  end
+end

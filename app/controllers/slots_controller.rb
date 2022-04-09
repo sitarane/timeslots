@@ -87,6 +87,6 @@ class SlotsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def slot_params
-      params.require(:slot).permit(:name, :description, :start_time)
+      params.require(:slot).permit(:description, :start_time)
     end
 end
