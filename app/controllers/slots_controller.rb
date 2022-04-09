@@ -18,7 +18,8 @@ class SlotsController < ApplicationController
   # GET /slots/new
   def new
     authorize Slot
-    @slot = @calendar.slots.new
+    in_two_days_at_8 = (Time.zone.now + 2.days).beginning_of_day + 8.hours
+    @slot = @calendar.slots.new(start_time: in_two_days_at_8)
   end
 
   # GET /slots/1/edit
