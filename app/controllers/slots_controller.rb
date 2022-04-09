@@ -2,12 +2,6 @@ class SlotsController < ApplicationController
   before_action :set_slot, only: %i[ show edit update destroy ]
   before_action :set_calendar, only: [:new, :create]
 
-  # GET /slots or /slots.json
-  def index
-    show_date = params.fetch(:start_date, Date.today).to_date
-    @slots = Slot.where(start_time: show_date.beginning_of_month.beginning_of_week..show_date.end_of_month.end_of_week)
-  end
-
   # GET /slots/1 or /slots/1.json
   def show
     authorize @slot
@@ -35,7 +29,7 @@ class SlotsController < ApplicationController
 
     respond_to do |format|
       if @slot.save
-        format.html { redirect_to calendar_slot_url(@slot.calendar, @slot), notice: "Slot was successfully created." }
+        format.html { redirect_to calendar_url(@slot.calendar), notice: "Slot was successfully created." }
         format.json { render :show, status: :created, location: @slot }
       else
         format.html { render :new, status: :unprocessable_entity }

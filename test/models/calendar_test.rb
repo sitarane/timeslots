@@ -44,10 +44,11 @@ class CalendarTest < ActiveSupport::TestCase
   end
   test '#score_board' do
     # is a 4 x 4 hash with values betwen -1 and 1
-    assert_instance_of Hash, @calendar.score_board
-    assert_equal 2, @calendar.score_board.length
-    assert_equal 2, @calendar.score_board.first.length
-    @calendar.score_board.each_value do |guest_list|
+    test_board = @calendar.score_board
+    assert_instance_of Hash, test_board
+    assert_equal 2, test_board.length
+    assert_equal 2, test_board.first.length
+    test_board.each_value do |guest_list|
       guest_list.each_value do |score|
         assert score >= -1
         assert score <= 1

@@ -16,9 +16,11 @@
           <%= l(slot.start_time, format: :time) %>
         </div>
       <% end %>
-      <div>
-        <%= "lala" %>
-      </div>
+      <% if @editor && @assignations[slot.id].present? %>
+        <div>
+          <%= User.find(@assignations[slot.id]).name %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 

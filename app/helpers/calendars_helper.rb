@@ -79,12 +79,13 @@ module CalendarsHelper
         hate_list[slot] += score if score < 0
       end
     end
+    assigned = Hash.new
+    return assigned if hate_list.empty?
     sorted_list = hate_list.sort_by { |slot, hate_score| hate_score }
     most_hated_slot = sorted_list[0][0]
 
     # make a list of people who want it
     wanters = score_board[most_hated_slot].select { |_guest, score| score >= 0 }
-    assigned = Hash.new
     if wanters
       winner = wanters.keys.sample
       assigned[most_hated_slot] = winner
@@ -98,7 +99,15 @@ module CalendarsHelper
   end
 
 
-  def assign_at_random
-    # hopefully I never need to write this
+  def assign_at_random(score_board)
+    # Just assign the first slot to the first user
+    slot = score_board.keys.first
+    winner = score_board.values.first.keys.first
+    assigned = {slot => winner}
+    score_board.delete(slot)
+      score_board.each_value do |score_list|
+        score_list.delete(winner)
+      end
+    return assigned
   end
 end
