@@ -71,9 +71,9 @@ class CalendarsController < ApplicationController
   def assign_slots
     @score_board = @calendar.score_board
     assignations = Hash.new # slot => user
-    old_board = Hash.new
-    until @score_board == old_board
-      old_board = @score_board
+    old_length = 0
+    until @score_board.length == old_length
+      old_length = @score_board.length
       assignations.merge!(calculated_assignations)
       return assignations if @score_board.empty?
       assignations.merge!(helpers.assign_at_random(@score_board))
@@ -84,9 +84,9 @@ class CalendarsController < ApplicationController
 
   def calculated_assignations
     assignations = Hash.new # slot => user
-    old_board = Hash.new
-    until @score_board == old_board
-      old_board = @score_board
+    old_length = 0
+    until @score_board.length == old_length
+      old_length = @score_board.length
       assignations.merge!(assign_first_pass)
       return assignations if @score_board.empty?
       assignations.merge!(helpers.assign_most_hated_to_someone_who_wants_it(@score_board))
@@ -97,18 +97,20 @@ class CalendarsController < ApplicationController
 
   def assign_first_pass
     assignations = Hash.new
-    old_board = Hash.new
-    until @score_board == old_board
-      old_board = @score_board
+    old_length = 0
+    until @score_board.length == old_length
+      old_length = @score_board.length
+
       assignations.merge!(helpers.assign_wanted_only_by_one(@score_board))
       return assignations if @score_board.empty?
 
       assignations.merge!(helpers.assign_hated_by_all_minus_one(@score_board))
       return assignations if @score_board.empty?
 
-      assignations.merge!(helpers.assign_most_wanted(@score_board))
-      return assignations if @score_board.empty?
     end
+
+    assignations.merge!(helpers.assign_most_wanted(@score_board))
+
     return assignations
   end
 
