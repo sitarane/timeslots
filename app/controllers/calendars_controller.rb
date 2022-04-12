@@ -111,7 +111,6 @@ class CalendarsController < ApplicationController
 
       assignations.merge!(helpers.assign_hated_by_all_minus_one(@score_board))
       return assignations if @score_board.empty? || assignations.length == @guest_count
-
     end
 
     assignations.merge!(helpers.assign_most_wanted(@score_board))

@@ -102,7 +102,36 @@ module CalendarsHelper
 
 
   def assign_at_random(score_board)
-    # Try to assign the first wanted slot, then can, then cannot.
+    # Try to assign the first wanted slot
+    assigned = Hash.new
+    score_board.each do |slot, score_list|
+      score_list.each do |guest, score|
+        if score > 0
+          assigned[slot] = guest
+          score_board.delete(slot)
+          score_board.each_value do |score_list|
+            score_list.delete(guest)
+          end
+          return assigned
+        end
+      end
+    end
+
+    # Try to assign the first can-ed slot
+    score_board.each do |slot, score_list|
+      score_list.each do |guest, score|
+        if score = 0
+          assigned[slot] = guest
+          score_board.delete(slot)
+          score_board.each_value do |score_list|
+            score_list.delete(guest)
+          end
+          return assigned
+        end
+      end
+    end
+
+    # assign whatever
     slot = score_board.keys.first
     winner = score_board.values.first.keys.first
     assigned = {slot => winner}

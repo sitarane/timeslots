@@ -52,6 +52,16 @@ class CalendarsHelperTest < ActionView::TestCase
         2=>-0.7
       }
     }
+    @bad_board = {
+      1=>{
+        1=>-1,
+        2=>-1
+      },
+      2=>{
+        1=>-1,
+        2=>-1
+      }
+    }
   end
   test '#assign_wanted_only_by_one' do
     assert assign_wanted_only_by_one(@score_board) == { 3 => 4 }
@@ -70,5 +80,13 @@ class CalendarsHelperTest < ActionView::TestCase
     assert @score_board.length == 3
     assert assign_most_hated_to_someone_who_wants_it(@most_hated) == { 3 => 1 }
     assert @most_hated.length == 2
+  end
+  test '#assign_at_random' do
+    assert assign_at_random(@most_wanted) == { 1 => 1 }
+    assert @most_wanted.length == 1
+    assert assign_at_random(@most_hated) == { 1 => 1 }
+    assert @most_hated.length == 2
+    assert assign_at_random(@bad_board) == { 1 => 1 }
+    assert @bad_board.length == 1
   end
 end
