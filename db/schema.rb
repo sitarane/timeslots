@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_09_081435) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_12_095954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_09_081435) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "calendar_id", null: false
+    t.integer "winner"
     t.index ["calendar_id"], name: "index_slots_on_calendar_id"
   end
 
