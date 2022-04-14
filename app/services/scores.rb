@@ -1,6 +1,4 @@
 module Scores
-  class Build
-  end
   class Assign
     def initialize(calendar)
       @score_board = calendar.score_board
