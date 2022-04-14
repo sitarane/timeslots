@@ -10,7 +10,7 @@ class CalendarsController < ApplicationController
   def show
     flash.now[:notice] = I18n.t :please_login unless Current.user
     @editor = @calendar.users.include?(Current.user)
-    @assignations = @calendar.assign_slots if @editor
+    @assignations = Scores::Assign.new(@calendar).call if @editor
   end
 
   # GET /calendars/new
