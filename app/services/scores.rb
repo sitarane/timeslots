@@ -1,7 +1,7 @@
 module Scores
-  class Assign
-    def initialize(calendar)
-      @score_board = calendar.score_board
+  class AssignationBoard
+    def initialize(score_board)
+      @score_board = score_board
       @guest_count = @score_board.any? ? @score_board.values.first.length : 0
     end
     def call
@@ -150,7 +150,6 @@ module Scores
       end
       assigned
     end
-
 
     def assign_at_random
       # Change to first arrived first served
