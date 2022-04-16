@@ -1,4 +1,5 @@
 class CalendarsController < ApplicationController
+  include Scores
   before_action :set_calendar, only: %i[ show edit update destroy ]
 
   # GET /calendars or /calendars.json
@@ -10,7 +11,7 @@ class CalendarsController < ApplicationController
   def show
     flash.now[:notice] = I18n.t :please_login unless Current.user
     @editor = @calendar.users.include?(Current.user)
-    @assignations = assign_slots if @editor
+    @assignations = ScoreBoard.new(@calendar.score_board).assign_slots if @editor
   end
 
   # GET /calendars/new
@@ -67,55 +68,6 @@ class CalendarsController < ApplicationController
   end
 
   private
-
-  def assign_slots
-    @score_board = @calendar.score_board
-    @guest_count = @calendar.guests.count
-    assignations = Hash.new # slot => user
-    old_length = 0
-    until @score_board.length == old_length
-      old_length = @score_board.length
-
-      assignations.merge!(calculated_assignations)
-      return assignations if @score_board.empty? || assignations.length == @guest_count
-
-      assignations.merge!(helpers.assign_at_random(@score_board))
-      return assignations if @score_board.empty? || assignations.length == @guest_count
-    end
-    return assignations
-  end
-
-  def calculated_assignations
-    assignations = Hash.new # slot => user
-    old_length = 0
-    until @score_board.length == old_length
-      old_length = @score_board.length
-
-      assignations.merge!(assign_first_pass)
-      return assignations if @score_board.empty? || assignations.length == @guest_count
-
-      assignations.merge!(helpers.assign_most_hated_to_someone_who_wants_it(@score_board))
-      return assignations if @score_board.empty? || assignations.length == @guest_count
-    end
-    return assignations
-  end
-
-  def assign_first_pass
-    assignations = Hash.new
-    old_length = 0
-    until @score_board.length == old_length
-      old_length = @score_board.length
-
-      assignations.merge!(helpers.assign_wanted_only_by_one(@score_board))
-      return assignations if @score_board.empty? || assignations.length == @guest_count
-
-      assignations.merge!(helpers.assign_hated_by_all_minus_one(@score_board))
-      return assignations if @score_board.empty? || assignations.length == @guest_count
-    end
-
-    assignations.merge!(helpers.assign_most_wanted(@score_board))
-    return assignations
-  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_calendar

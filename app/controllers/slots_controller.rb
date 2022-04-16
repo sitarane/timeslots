@@ -43,7 +43,7 @@ class SlotsController < ApplicationController
     authorize @slot
     respond_to do |format|
       if @slot.update(slot_params)
-        format.html { redirect_to calendar_slot_url(@slot), notice: "Slot was successfully updated." }
+        format.html { redirect_to calendar_url(@slot.calendar), notice: "Slot was successfully updated." }
         format.json { render :show, status: :ok, location: @slot }
       else
         format.html { render :edit, status: :unprocessable_entity }
