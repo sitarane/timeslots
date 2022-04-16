@@ -65,6 +65,10 @@ class ScoresTest < ActiveSupport::TestCase
       }
     }
   end
+  test '#assign_slots' do
+    assert ScoreBoard.new(@score_board).assign_slots == {3=>4, 2=>1, 1=>2, 4=>3}
+    assert @score_board.empty?
+  end
   test '#assign_wanted_only_by_one' do
     assert ScoreBoard.new(@score_board).assign_wanted_only_by_one == { 3 => 4 }
     assert @score_board.length == 3
