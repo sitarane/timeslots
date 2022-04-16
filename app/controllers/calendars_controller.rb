@@ -1,4 +1,5 @@
 class CalendarsController < ApplicationController
+  include Scores
   before_action :set_calendar, only: %i[ show edit update destroy ]
 
   # GET /calendars or /calendars.json
@@ -10,7 +11,7 @@ class CalendarsController < ApplicationController
   def show
     flash.now[:notice] = I18n.t :please_login unless Current.user
     @editor = @calendar.users.include?(Current.user)
-    @assignations = Scores::AssignationBoard.new(@calendar.score_board).call if @editor
+    @assignations = ScoreBoard.new(@calendar.score_board).assign_slots if @editor
   end
 
   # GET /calendars/new

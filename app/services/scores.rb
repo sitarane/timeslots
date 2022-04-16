@@ -1,10 +1,10 @@
 module Scores
-  class AssignationBoard
+  class ScoreBoard
     def initialize(score_board)
       @score_board = score_board
       @guest_count = @score_board.any? ? @score_board.values.first.length : 0
     end
-    def call
+    def assign_slots
       assignations = Hash.new # slot => user
       old_length = 0
       until @score_board.length == old_length
