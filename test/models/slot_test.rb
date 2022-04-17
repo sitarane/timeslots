@@ -1,6 +1,7 @@
 require "test_helper"
 
 class SlotTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
   test "Empty slot invalid" do
     slot = calendars(:one).slots.new
     assert_not slot.valid?
@@ -15,7 +16,11 @@ class SlotTest < ActiveSupport::TestCase
   end
   test "Valid slot can be saved" do
     slot = calendars(:one).slots.new(start_time: 3.days.since)
-    assert slot.valid?
     assert slot.save
+  end
+  test 'Job enqueud correctly' do
+    assert_enqueued_with(job: AssignWinnerJob) do
+      calendars(:one).slots.new(start_time: 3.days.since).save
+    end
   end
 end
