@@ -33,7 +33,7 @@ class Calendar < ApplicationRecord
     guest_scored_count = guest_scored_count(guest_list)
     board = Hash.new
     slots.each do |slot|
-      next if slot.start_time < Time.now + advance_warning.days
+      next if slot.winner
       board[slot.id] = slot_score_list(slot, guest_list, guest_scored_count)
     end
     board
