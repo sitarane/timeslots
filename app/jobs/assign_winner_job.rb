@@ -4,6 +4,6 @@ class AssignWinnerJob < ApplicationJob
 
   def perform(slot)
     assignations = ScoreBoard.new(slot.calendar.score_board).assign_slots
-    return slot.winner = assignations[slot.id]
+    slot.update(winner: assignations[slot.id])
   end
 end
