@@ -31,4 +31,6 @@
 
     <%= button_to "Destroy this slot", calendar_slot_path, method: :delete %>
   </div>
+<% else %>
+  <%= link_to "Back to calendar", calendar_path(@slot.calendar) %>
 <% end %>
