@@ -26,8 +26,20 @@
 
   <% if @editor %>
     <div>
-      <%= link_to 'Add a slot', new_calendar_slot_path(calendar) %>
+      <%= button_to 'Add a slot', new_calendar_slot_path(calendar) %>
     </div>
+
+    <div>
+      <%= form_with(model: calendar) do |form| %>
+        <span>
+          <%= form.text_field :users, value: 'List of emails' %>
+        </span>
+        <span>
+          <%= form.submit 'Add editor' %>
+        </span>
+      <% end %>
+    </div>
+
   <% end %>
 
   <% if calendar.description %>
