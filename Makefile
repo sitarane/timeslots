@@ -1,3 +1,5 @@
+.PHONY: test
+
 sandbox:
 	docker-compose run --rm web rails console --sandbox
 console:
@@ -5,7 +7,7 @@ console:
 bash:
 	docker-compose run --rm web bash
 web:
-	docker-compose up -d
+	docker-compose run --rm --service-ports web
 down:
 	docker-compose down
 restart:
@@ -14,7 +16,7 @@ dbm:
 	docker-compose run --rm web rails db:migrate
 bundle:
 	docker-compose run --rm web bundle install
-tst:
+test:
 	docker-compose run --rm test rails test $(f)
 routes:
 	docker-compose run --rm web rails routes
