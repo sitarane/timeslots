@@ -2,14 +2,6 @@ require "test_helper"
 
 class CalendarsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @mock_policy = Minitest::Mock.new
-    @mock_policy.expect :new?, true
-    @mock_policy.expect :create?, true
-    @mock_policy.expect :edit?, true
-    @mock_policy.expect :destroy?, true
-
-    @mock_user = Minitest::Mock.new
-    @mock_user.expect :user, users(:one)
     @calendar = calendars(:one)
   end
 
@@ -21,6 +13,7 @@ class CalendarsControllerTest < ActionDispatch::IntegrationTest
   test "should show calendar" do
     get calendar_url(@calendar, locale: :en)
     assert_response :success
+    assert_select 'h1'
   end
 
   test "Should show new form" do
@@ -35,15 +28,9 @@ class CalendarsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "Should destroy calendar" do
-    log_in_as(users(:one))
-    delete calendar_url(@calendar, locale: :en)
-    assert_redirected_to calendars_url
-  end
-
   test "Should create calendar" do
     log_in_as(users(:one))
-    post calendars_url(locale: :en),
+    post calendars_url,
     params: { calendar: {
       name: "a calendar",
       description: "bla bla bla description"
@@ -51,4 +38,18 @@ class CalendarsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to calendar_url(Calendar.last)
   end
 
+  test "Should update calendar" do
+    log_in_as(users(:one))
+    patch calendar_url(@calendar),
+    params: { calendar: {
+      name: "new name"
+    }}
+    assert_redirected_to calendar_url(@calendar)
+  end
+
+  test "Should destroy calendar" do
+    log_in_as(users(:one))
+    delete calendar_url(@calendar)
+    assert_redirected_to calendars_url
+  end
 end
