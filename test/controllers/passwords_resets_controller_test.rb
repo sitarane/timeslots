@@ -3,12 +3,12 @@ require "test_helper"
 class PasswordsResetsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
+    @token = @user.signed_id(purpose: 'password_reset', expires_in: 15.minutes)
   end
   test 'Open new password page' do
     get new_password_reset_url
     assert_response :success
   end
-  test 'edit'
   test 'Start password reset process' do
     assert_enqueued_email_with PasswordMailer,
     :reset,
@@ -18,9 +18,8 @@ class PasswordsResetsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url(locale: :en)
   end
   test 'Update password' do
-    token = @user.signed_id(purpose: 'password_reset', expires_in: 15.minutes)
     patch password_reset_url,
-    params: { token: token,
+    params: { token: @token,
       user: { password: 'whatevs',
         password_confirmation: 'whatevs' } }
     assert_redirected_to login_path(locale: :en)

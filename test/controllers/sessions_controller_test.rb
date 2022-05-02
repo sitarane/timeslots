@@ -15,4 +15,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     post sessions_url params: { email: 'not@exist.com', password: 'whatever'  }
     assert_response :success
   end
+  test 'log out' do
+    log_in_as(users(:one))
+    delete sessions_url
+    assert_redirected_to root_url(locale: :en)
+    assert_not session[:user_id]
+  end
 end

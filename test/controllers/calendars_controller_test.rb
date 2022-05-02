@@ -49,7 +49,9 @@ class CalendarsControllerTest < ActionDispatch::IntegrationTest
 
   test "Should destroy calendar" do
     log_in_as(users(:one))
-    delete calendar_url(@calendar)
+    assert_difference "Calendar.count", -1 do
+      delete calendar_url(@calendar)
+    end
     assert_redirected_to calendars_url
   end
 end
