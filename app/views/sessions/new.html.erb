@@ -1,17 +1,17 @@
 <h1>Sign In</h1>
 <%= form_with url: sessions_path do |f| %>
   <div>
-    <%= f.label 'email:'%><br>
+    <%= f.label 'Email'%><br>
     <%= f.text_field :email, id: 'email' %>
   </div>
   <div>
-    <%= f.label 'password:'%><br>
+    <%= f.label 'Password'%><br>
     <%= f.password_field :password, id: 'password' %>
   </div>
   <div>
     <%= link_to 'Forgot my password', new_password_reset_path %>
   <div>
-    <%= f.submit 'Log In' %>
+    <%= f.submit 'Log In', id: 'login' %>
   </div>
   <div>
     <%= link_to "I don't have an account", new_users_path %>
