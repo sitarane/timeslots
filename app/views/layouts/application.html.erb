@@ -28,17 +28,21 @@
           <%= link_to 'EN', { locale: :en }  %>
         <%end%>
       </nav>
+      <h1><%= page_title %></h1>
+      <p><%= page_subtitle %></p>
     </header>
-    <% if notice %>
-      <p class="notice">
-        <%= notice %>
-      </p>
-    <% end %>
-    <% if alert %>
-      <p class="alert">
-        <%= alert %>
-      </p>
-    <% end %>
-    <%= yield %>
+    <main>
+        <% if notice %>
+        <blockquote>
+          <%= notice %>
+        </blockquote>
+      <% end %>
+      <% if alert %>
+        <mark>
+          <%= alert %>
+        </mark>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
 </html>
