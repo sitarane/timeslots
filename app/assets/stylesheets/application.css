@@ -14,3 +14,6 @@
  *= require_self
  *= require simple_calendar
  */
+
+/* Ovieride simplecss display: block */
+table { display: table !important; }
