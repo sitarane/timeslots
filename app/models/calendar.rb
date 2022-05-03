@@ -2,6 +2,7 @@ class Calendar < ApplicationRecord
   has_and_belongs_to_many :users
   has_many :slots, dependent: :destroy
 
+  validates :name, presence: true
   validates :users, presence: true
   validates :advance_warning, numericality: :only_integer, presence: true
 

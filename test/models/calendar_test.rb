@@ -15,6 +15,13 @@ class CalendarTest < ActiveSupport::TestCase
     )
     assert_not calendar.valid?
   end
+  test "Calendar invalid without a name" do
+    calendar = Calendar.new(
+      description: "bla bla bla description",
+      users: [users(:one)]
+    )
+    assert_not calendar.valid?
+  end
   test "no need to set advance warning" do
     calendar = Calendar.new(
       name: "a calendar",
