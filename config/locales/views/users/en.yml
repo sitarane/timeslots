@@ -1,0 +1,10 @@
+en:
+  require_user_logged_in: You must be signed in
+  token_expired: Your token has expired. Please try again.
+  check_email_password_reset: Please check your email to reset the password
+  password_reset: Your password was reset successfully. Please sign in.
+  password_updated: Password Updated
+  logged_in: Logged in successfully
+  invalid_login: Invalid email or password
+  logged_out: Logged Out
+  user_created: Successfully created account

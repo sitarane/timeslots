@@ -1,0 +1,4 @@
+en:
+  booking_created: Booking was successfully created
+  booking_updated: Booking was successfully updated
+  booking_destroyed: Booking was successfully destroyed

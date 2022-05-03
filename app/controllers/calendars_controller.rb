@@ -33,7 +33,7 @@ class CalendarsController < ApplicationController
 
     respond_to do |format|
       if @calendar.save
-        format.html { redirect_to calendar_url(@calendar), notice: "Calendar was successfully created." }
+        format.html { redirect_to calendar_url(@calendar), notice: t(:calendar_created) }
         format.json { render :show, status: :created, location: @calendar }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -50,7 +50,7 @@ class CalendarsController < ApplicationController
     updated_params.delete(:users)
     respond_to do |format|
       if @calendar.update(updated_params)
-        format.html { redirect_to calendar_url(@calendar), notice: "Calendar was successfully updated." }
+        format.html { redirect_to calendar_url(@calendar), notice: t(:calendar_updated) }
         format.json { render :show, status: :ok, location: @calendar }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,7 +65,7 @@ class CalendarsController < ApplicationController
     @calendar.destroy
 
     respond_to do |format|
-      format.html { redirect_to calendars_url, notice: "Calendar was successfully destroyed." }
+      format.html { redirect_to calendars_url, notice: t(:calendar_updated) }
       format.json { head :no_content }
     end
   end

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       WelcomeMailer.with(user: @user).welcome_email.deliver_now
       # stores saved user id in a session
       session[:user_id] = @user.id
-      redirect_to root_path, notice: 'Successfully created account'
+      redirect_to root_path, notice: t(:user_created)
     else
       render :new
     end

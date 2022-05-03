@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user_logged_in!
-    redirect_to new_sessions_path, alert: 'You must be signed in' if Current.user.nil?
+    redirect_to new_sessions_path, alert: t(:require_user_logged_in) if Current.user.nil?
   end
 
   def switch_locale(&action)

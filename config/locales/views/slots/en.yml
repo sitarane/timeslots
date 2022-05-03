@@ -3,3 +3,10 @@ en:
   can: I could have this one
   want: I would like to have this one
   request_slot: Request slot
+  slot_created: Slot was successfully created
+  slot_updated: Slot was successfully updated
+  slot_destroyed: Slot was successfully destroyed
+  edit_slot: Edit this slot
+  back_to_calendar: Back to calendar
+  destroy_slot: Destroy this slot
+  add_slot: Add a slot

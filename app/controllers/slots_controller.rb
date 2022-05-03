@@ -29,7 +29,7 @@ class SlotsController < ApplicationController
 
     respond_to do |format|
       if @slot.save
-        format.html { redirect_to calendar_url(@slot.calendar), notice: "Slot was successfully created." }
+        format.html { redirect_to calendar_url(@slot.calendar), notice: t(:slot_created) }
         format.json { render :show, status: :created, location: @slot }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class SlotsController < ApplicationController
     authorize @slot
     respond_to do |format|
       if @slot.update(slot_params)
-        format.html { redirect_to calendar_url(@slot.calendar), notice: "Slot was successfully updated." }
+        format.html { redirect_to calendar_url(@slot.calendar), notice: t(:slot_updated) }
         format.json { render :show, status: :ok, location: @slot }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -59,7 +59,7 @@ class SlotsController < ApplicationController
     @slot.destroy
 
     respond_to do |format|
-      format.html { redirect_to calendar_url(calendar), notice: "Slot was successfully destroyed." }
+      format.html { redirect_to calendar_url(calendar), notice: t(:slot_destroyed) }
       format.json { head :no_content }
     end
   end
