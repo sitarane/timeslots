@@ -18,6 +18,8 @@ bundle:
 	docker-compose run --rm web bundle install
 test:
 	docker-compose run --rm test rails test $(f)
+system-test:
+	docker-compose run --rm test rails test:system
 routes:
 	docker-compose run --rm web rails routes
 logs:

@@ -2,10 +2,10 @@
 
 one:
   description: Slot one description
-  start_time: <%= Time.zone.now + 5.days %>
+  start_time: <%= (Time.zone.now + 5.days).beginning_of_day + 9.hours %>
   calendar: one
 
 two:
   description: Slot two description
-  start_time: <%= Time.zone.now + 3.days %>
+  start_time: <%= (Time.zone.now + 3.days).beginning_of_day + 15.hours %>
   calendar: one

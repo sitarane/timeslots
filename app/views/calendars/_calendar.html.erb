@@ -26,7 +26,7 @@
 
   <% if @editor %>
     <div>
-      <%= button_to 'Add a slot', new_calendar_slot_path(calendar) %>
+      <%= button_to 'Add a slot', new_calendar_slot_path(calendar), method: :get %>
     </div>
 
     <div>
