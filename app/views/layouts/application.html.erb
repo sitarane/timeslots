@@ -12,21 +12,23 @@
   </head>
 
   <body>
-    <nav>
-      <%= link_to t(:home), root_path unless action_name == "home" %>
-      <%= link_to t(:calendars), calendars_path unless controller_name == "calendars" && action_name == "index" %>
-      <% if Current.user %>
-        <%= link_to t(:log_out), logout_path, method: :delete %>
-      <% else %>
-        <%= link_to t(:sign_up), new_users_path  %>
-        <%= link_to t(:log_in), new_sessions_path  %>
-      <% end %>
-      <% if I18n.locale == :en %>
-        <%= link_to 'DE', { locale: :de }  %>
-      <% else %>
-        <%= link_to 'EN', { locale: :en }  %>
-      <%end%>
-    </nav>
+    <header>
+      <nav>
+        <%= link_to t(:home), root_path unless action_name == "home" %>
+        <%= link_to t(:calendars), calendars_path unless controller_name == "calendars" && action_name == "index" %>
+        <% if Current.user %>
+          <%= link_to t(:log_out), logout_path, method: :delete %>
+        <% else %>
+          <%= link_to t(:sign_up), new_users_path  %>
+          <%= link_to t(:log_in), new_sessions_path  %>
+        <% end %>
+        <% if I18n.locale == :en %>
+          <%= link_to 'DE', { locale: :de }  %>
+        <% else %>
+          <%= link_to 'EN', { locale: :en }  %>
+        <%end%>
+      </nav>
+    </header>
     <% if notice %>
       <p class="notice">
         <%= notice %>
