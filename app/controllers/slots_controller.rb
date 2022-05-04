@@ -27,29 +27,21 @@ class SlotsController < ApplicationController
     @slot.calendar = @calendar
     authorize @slot
 
-    respond_to do |format|
-      if @slot.save
-        format.html { redirect_to calendar_url(@slot.calendar), notice: t(:slot_created) }
-        format.json { render :show, status: :created, location: @slot }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @slot.errors, status: :unprocessable_entity }
-      end
+    if @slot.save
+      redirect_to calendar_url(@slot.calendar), notice: t(:slot_created)
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /slots/1 or /slots/1.json
   def update
     authorize @slot
-    respond_to do |format|
       if @slot.update(slot_params)
-        format.html { redirect_to calendar_url(@slot.calendar), notice: t(:slot_updated) }
-        format.json { render :show, status: :ok, location: @slot }
+        redirect_to calendar_url(@slot.calendar), notice: t(:slot_updated)
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @slot.errors, status: :unprocessable_entity }
+        render :edit, status: :unprocessable_entity
       end
-    end
   end
 
   # DELETE /slots/1 or /slots/1.json
@@ -58,10 +50,7 @@ class SlotsController < ApplicationController
     calendar = @slot.calendar
     @slot.destroy
 
-    respond_to do |format|
-      format.html { redirect_to calendar_url(calendar), notice: t(:slot_destroyed) }
-      format.json { head :no_content }
-    end
+    redirect_to calendar_url(calendar), notice: t(:slot_destroyed)
   end
 
   private

@@ -15,28 +15,20 @@ class BookingsController < ApplicationController
     @booking = @slot.bookings.new(booking_params)
     @booking.user = Current.user
 
-    respond_to do |format|
-      if @booking.save
-        format.html { redirect_to calendar_url(@slot.calendar), notice: t(:booking_created) }
-        format.json { render :show, status: :created, location: @booking }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+    if @booking.save
+      redirect_to calendar_url(@slot.calendar), notice: t(:booking_created)
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /bookings/1 or /bookings/1.json
   def update
     @booking = Booking.find_by slot_id: @slot.id, user_id: Current.user.id
-    respond_to do |format|
-      if @booking.update(booking_params)
-        format.html { redirect_to calendar_url(@slot.calendar), notice: t(:booking_updated) }
-        format.json { render :show, status: :ok, location: @booking }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
-      end
+    if @booking.update(booking_params)
+      redirect_to calendar_url(@slot.calendar), notice: t(:booking_updated)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -44,10 +36,7 @@ class BookingsController < ApplicationController
   def destroy
     @booking.destroy
 
-    respond_to do |format|
-      format.html { redirect_to bookings_url, notice: t(:booking_destroyed) }
-      format.json { head :no_content }
-    end
+    redirect_to bookings_url, notice: t(:booking_destroyed)
   end
 
   private

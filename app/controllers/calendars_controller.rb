@@ -31,14 +31,10 @@ class CalendarsController < ApplicationController
     @calendar.users = [ Current.user ]
     authorize @calendar
 
-    respond_to do |format|
-      if @calendar.save
-        format.html { redirect_to calendar_url(@calendar), notice: t(:calendar_created) }
-        format.json { render :show, status: :created, location: @calendar }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @calendar.errors, status: :unprocessable_entity }
-      end
+    if @calendar.save
+      redirect_to calendar_url(@calendar), notice: t(:calendar_created)
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -48,14 +44,10 @@ class CalendarsController < ApplicationController
     add_editors if calendar_params[:users]
     updated_params = calendar_params
     updated_params.delete(:users)
-    respond_to do |format|
-      if @calendar.update(updated_params)
-        format.html { redirect_to calendar_url(@calendar), notice: t(:calendar_updated) }
-        format.json { render :show, status: :ok, location: @calendar }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @calendar.errors, status: :unprocessable_entity }
-      end
+    if @calendar.update(updated_params)
+      redirect_to calendar_url(@calendar), notice: t(:calendar_updated)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -64,10 +56,7 @@ class CalendarsController < ApplicationController
     authorize @calendar
     @calendar.destroy
 
-    respond_to do |format|
-      format.html { redirect_to calendars_url, notice: t(:calendar_updated) }
-      format.json { head :no_content }
-    end
+    redirect_to calendars_url, notice: t(:calendar_updated)
   end
 
   private
