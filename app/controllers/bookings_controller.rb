@@ -1,15 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_slot, only: %i[ create update ]
 
-  # GET /bookings or /bookings.json
-  def index
-    @bookings = Booking.all
-  end
-
-  # GET /bookings/1 or /bookings/1.json
-  def show
-  end
-
   # GET /bookings/new
   def new
     @booking = Booking.new

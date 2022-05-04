@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :bookings
+  resources :bookings, except: [:index, :show]
   get '/:locale', to: 'pages#home'
   root 'pages#home'
   scope "(:locale)", locale: /en|de/ do
