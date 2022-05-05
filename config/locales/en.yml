@@ -33,6 +33,7 @@ en:
   app_name: Timeslots
   slogan: Helps you fill your calendar
   hi: Hi
+  save: Save
   time:
     formats:
       datetime: "%Y-%m-%d %H:%M"
