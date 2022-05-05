@@ -7,6 +7,6 @@
 
   <p>
     <strong>Start time:</strong>
-    <%= l slot.start_time, format: :datetime %>
+    <%= l slot.start_time.in_time_zone(Current.user.timezone), format: :datetime %>
   </p>
 </div>

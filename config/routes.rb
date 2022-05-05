@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/:locale', to: 'pages#home'
   root 'pages#home'
   scope "(:locale)", locale: /en|de/ do
-    resource :users, only: [:new, :create] # for now...
+    resource :users, only: [:new, :create, :update] # for now...
     resources :calendars do
       resources :slots, except: :index
     end

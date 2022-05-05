@@ -8,3 +8,4 @@ en:
   invalid_login: Invalid email or password
   logged_out: Logged Out
   user_created: Successfully created account
+  user_updated: Successfully updated account

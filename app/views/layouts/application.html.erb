@@ -46,10 +46,10 @@
     </main>
     <% if Current.user %>
       <footer>
-          <%= form_with(model: Current.user, url: users_path) do |form| %>
-            <%= form.time_zone_select :time_zone %>
-            <%= form.submit t(:save) %>
-          <% end %>
+        <%= form_with(model: Current.user, url: users_path) do |form| %>
+          <%= form.time_zone_select :timezone %>
+          <%= form.submit t(:save) %>
+        <% end %>
       </footer>
     <% end %>
   </body>
