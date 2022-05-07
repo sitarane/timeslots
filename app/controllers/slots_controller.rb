@@ -36,6 +36,7 @@ class SlotsController < ApplicationController
 
   # PATCH/PUT /slots/1 or /slots/1.json
   def update
+
     authorize @slot
       if @slot.update(slot_params)
         redirect_to calendar_url(@slot.calendar), notice: t(:slot_updated)

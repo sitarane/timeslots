@@ -1,10 +1,17 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
+
   before_action :set_current_user
+  before_action :set_time_zone
+
   around_action :switch_locale
 
   def set_current_user
     Current.user = User.find_by(id: session[:user_id]) if session[:user_id]
+  end
+
+  def set_time_zone
+    Time.zone = Current.user.timezone if Current.user
   end
 
   # required by Pundit

@@ -16,6 +16,6 @@ class Slot < ApplicationRecord
   end
 
   def future_start
-    errors.add(:start_time, I18n.t(:future_start)) if self.start_time && self.start_time < Time.now
+    errors.add(:start_time, I18n.t(:future_start)) if self.start_time && self.start_time < Time.zone.now
   end
 end

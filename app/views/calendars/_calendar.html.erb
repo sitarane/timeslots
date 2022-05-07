@@ -9,11 +9,11 @@
     <% slots.each do |slot| %>
       <% if Current.user %>
         <div>
-          <%= link_to l(slot.start_time.in_time_zone(Current.user.timezone), format: :time), calendar_slot_path(calendar, slot) %>
+          <%= link_to l(slot.start_time.in_time_zone(Time.zone), format: :time), calendar_slot_path(calendar, slot) %>
         </div>
       <% else %>
         <div>
-          <%= l(slot.start_time, format: :time) %>
+          <%= l(slot.start_time.in_time_zone(Time.zone), format: :time) %>
         </div>
       <% end %>
       <% if @editor && @assignations[slot.id].present? %>
