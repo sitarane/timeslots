@@ -6,10 +6,6 @@ class SlotsControllerTest < ActionDispatch::IntegrationTest
     @slot = slots(:one)
     @calendar = calendars(:one)
   end
-  # test 'must log in to see slots' do
-  #   get slot_url(@slot, locale: :en)
-  #   assert_error
-  # end
   test '#show a slot' do
     log_in_as(@user)
     get calendar_slot_url(@calendar, @slot, locale: :en)

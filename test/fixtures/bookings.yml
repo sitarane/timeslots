@@ -3,9 +3,9 @@
 one:
   user: one
   slot: one
-  score: 1
+  score: "can"
 
 two:
   user: two
-  slot: two
-  score: 1
+  slot: one
+  score: "cannot"

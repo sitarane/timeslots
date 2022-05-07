@@ -1,15 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_slot, only: %i[ create update ]
 
-  # GET /bookings/new
-  def new
-    @booking = Booking.new
-  end
-
-  # GET /bookings/1/edit
-  def edit
-  end
-
   # POST /bookings or /bookings.json
   def create
     @booking = @slot.bookings.new(booking_params)
@@ -30,13 +21,6 @@ class BookingsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
-  end
-
-  # DELETE /bookings/1 or /bookings/1.json
-  def destroy
-    @booking.destroy
-
-    redirect_to bookings_url, notice: t(:booking_destroyed)
   end
 
   private
