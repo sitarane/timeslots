@@ -1,4 +1,6 @@
 class Slot < ApplicationRecord
+  include Hashid::Rails
+
   belongs_to :calendar
   has_many :bookings, dependent: :destroy
 
