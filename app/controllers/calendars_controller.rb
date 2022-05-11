@@ -41,14 +41,18 @@ class CalendarsController < ApplicationController
   # PATCH/PUT /calendars/1 or /calendars/1.json
   def update
     authorize @calendar
-    add_editors if calendar_params[:users]
-    ## This looks ripe for refactor...
-    updated_params = calendar_params
-    updated_params.delete(:users)
-    if @calendar.update(updated_params)
-      redirect_to calendar_url(@calendar), notice: t(:calendar_updated)
+    if calendar_params[:new_editors_email_list]
+      if add_editors
+        redirect_to calendar_url(@calendar), notice: t(:calendar_updated)
+      else
+        redirect_to calendar_url(@calendar), alert: t(:calendar_update_failed)
+      end
     else
-      render :edit, status: :unprocessable_entity
+      if @calendar.update(calendar_params)
+        redirect_to calendar_url(@calendar), notice: t(:calendar_updated)
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 
@@ -63,7 +67,7 @@ class CalendarsController < ApplicationController
   private
 
   def add_editors
-    emails = calendar_params[:users]
+    emails = calendar_params[:new_editors_email_list]
 
     # split at spaces and commas
     list_of_emails = emails.split(/[,\s]+/)
@@ -71,6 +75,7 @@ class CalendarsController < ApplicationController
     list_of_users = Array.new
     list_of_emails.each do |email|
       list_of_users << User.find_by(email: email)
+      #needs to handle users not being found
     end
     @calendar.users << list_of_users
   end
@@ -82,6 +87,10 @@ class CalendarsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def calendar_params
-    params.require(:calendar).permit(:name, :description, :advance_warning, :users)
+    params.require(:calendar).permit(
+      :name,
+      :description,
+      :advance_warning,
+      :new_editors_email_list)
   end
 end

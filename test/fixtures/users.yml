@@ -9,3 +9,8 @@ two:
   name: Jean
   email: jean@email.com
   password_digest: $2a$12$OqCS.xsOXiLdzYrJoulr.eOt59KUfw7U/vv.hkEFBqxiXCJYpZpR6
+
+three:
+  name: Juan
+  email: juan@email.com
+  password_digest: $2a$12$OqCS.xsOXiLdzYrJoulr.eOt59KUfw7U/vv.hkEFBqxiXCJYpZpR6

@@ -2,4 +2,5 @@ en:
   please_login: You need to be logged in to pick slots
   calendar_created: Calendar was successfully created
   calendar_updated: Calendar was successfully updated
+  calendar_update_failed: Calendar update failed
   calendar_destroyed: Calendar was successfully destroyed

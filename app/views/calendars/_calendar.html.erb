@@ -32,7 +32,7 @@
     <div>
       <%= form_with(model: calendar) do |form| %>
         <span>
-          <%= form.text_field :users, value: 'List of emails' %>
+          <%= form.text_field :new_editors_email_list, value: 'List of emails' %>
         </span>
         <span>
           <%= form.submit 'Add editor' %>
