@@ -62,4 +62,9 @@ class CalendarTest < ActiveSupport::TestCase
       end
     end
   end
+  test "destroying calendar destroys slots" do
+    assert_difference("Slot.all.count", -2) do
+      @calendar.destroy
+    end
+  end
 end
