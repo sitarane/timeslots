@@ -32,13 +32,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_05_201835) do
     t.integer "advance_warning", default: 0, null: false
   end
 
-  create_table "calendars_users", id: false, force: :cascade do |t|
-    t.bigint "calendar_id"
-    t.bigint "user_id"
-    t.index ["calendar_id"], name: "index_calendars_users_on_calendar_id"
-    t.index ["user_id"], name: "index_calendars_users_on_user_id"
-  end
-
   create_table "slots", force: :cascade do |t|
     t.string "description"
     t.datetime "start_time", null: false
