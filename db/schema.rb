@@ -24,15 +24,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_05_201835) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
-  create_table "calendar_assignments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "calendar_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["calendar_id"], name: "index_calendar_assignments_on_calendar_id"
-    t.index ["user_id"], name: "index_calendar_assignments_on_user_id"
-  end
-
   create_table "calendars", force: :cascade do |t|
     t.string "name"
     t.text "description"
