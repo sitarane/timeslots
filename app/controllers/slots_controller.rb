@@ -6,7 +6,7 @@ class SlotsController < ApplicationController
   def show
     authorize @slot
     @booking = set_booking
-    @editor = @slot.calendar.users.include? Current.user
+    @editor = @slot.calendar.editors.include? Current.user
   end
 
   # GET /slots/new

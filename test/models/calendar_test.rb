@@ -4,11 +4,11 @@ class CalendarTest < ActiveSupport::TestCase
   def setup
     @calendar = calendars(:one)
   end
-  test '#user' do
-    assert @calendar.user
-    assert_not calendars(:two).user
-  end
-  test "Calendar invalid without a user" do
+  # test '#user' do
+  #   assert @calendar.editor
+  #   assert_not calendars(:two).editor
+  # end
+  test "Calendar invalid without an editor" do
     calendar = Calendar.new(
       name: "a calendar",
       description: "bla bla bla description"
@@ -18,7 +18,7 @@ class CalendarTest < ActiveSupport::TestCase
   test "Calendar invalid without a name" do
     calendar = Calendar.new(
       description: "bla bla bla description",
-      users: [users(:one)]
+      editors: [users(:one)]
     )
     assert_not calendar.valid?
   end
@@ -26,7 +26,7 @@ class CalendarTest < ActiveSupport::TestCase
     calendar = Calendar.new(
       name: "a calendar",
       description: "bla bla bla description",
-      users: [users(:one)]
+      editors: [users(:one)]
     )
     assert calendar.save
   end
@@ -35,13 +35,14 @@ class CalendarTest < ActiveSupport::TestCase
       name: "a calendar",
       description: "bla bla bla description",
       advance_warning: 2,
-      users: [users(:one)]
+      editors: [users(:one)]
     )
     assert calendar.save
   end
-  test "Can assign several users to calendar" do
-    @calendar.users << users(:two)
-    assert_equal 2, @calendar.users.count
+  test "Can assign several editors to calendar" do
+    assert_difference "@calendar.editors.count" do
+      @calendar.editors << users(:two)
+    end
   end
   test '#bookings' do
     assert_equal 2, @calendar.bookings.count

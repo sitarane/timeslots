@@ -10,7 +10,7 @@ class TimezonesTest < ActionDispatch::IntegrationTest
   end
 
   test "add a manager to a calendar" do
-    assert_difference("@calendar.users.count") do
+    assert_difference("@calendar.editors.count") do
       patch calendar_url(@calendar),
         params: {
           calendar: {
@@ -22,7 +22,7 @@ class TimezonesTest < ActionDispatch::IntegrationTest
   end
 
   test "add many managers to a calendar" do
-    assert_difference("@calendar.users.count", 2) do
+    assert_difference("@calendar.editors.count", 2) do
       patch calendar_url(@calendar),
         params: {
           calendar: {

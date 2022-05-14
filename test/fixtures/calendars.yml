@@ -3,11 +3,11 @@
 one:
   name: MyString
   description: MyText
-  users: one
+  editors: one
   advance_warning: 2
 
 two:
   name: MyString
   description: MyText
-  users: one, two
+  editors: one, two
   advance_warning: 2

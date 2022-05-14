@@ -14,6 +14,8 @@ restart:
 	docker-compose restart
 dbm:
 	docker-compose run --rm web rails db:migrate
+dbmt:
+	docker-compose run --rm web rails db:migrate RAILS_ENV=test
 bundle:
 	docker-compose run --rm web bundle install
 test:

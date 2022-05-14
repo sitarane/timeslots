@@ -10,9 +10,9 @@ class Calendar < ApplicationRecord
   validates :editors, presence: true
   validates :advance_warning, numericality: :only_integer, presence: true
 
-  def user
-    return false if users.count != 1
-    return users.first
+  def editor
+    return false if editors.count != 1
+    return editors.first
   end
 
   def bookings

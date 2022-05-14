@@ -30,7 +30,6 @@ class CalendarsController < ApplicationController
     @calendar = Calendar.new(calendar_params)
     @calendar.editors = [ Current.user ]
     authorize @calendar
-    debugger
 
     if @calendar.save
       redirect_to calendar_url(@calendar), notice: t(:calendar_created)
@@ -78,7 +77,7 @@ class CalendarsController < ApplicationController
       list_of_users << User.find_by(email: email)
       #needs to handle users not being found
     end
-    @calendar.users << list_of_users
+    @calendar.editors << list_of_users
   end
 
   # Use callbacks to share common setup or constraints between actions.
