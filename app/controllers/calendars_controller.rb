@@ -10,7 +10,7 @@ class CalendarsController < ApplicationController
   # GET /calendars/1 or /calendars/1.json
   def show
     flash.now[:notice] = I18n.t :please_login unless Current.user
-    @editor = @calendar.users.include?(Current.user)
+    @editor = @calendar.editors.include?(Current.user)
     @assignations = ScoreBoard.new(@calendar.score_board).assign_slots if @editor
   end
 
@@ -28,8 +28,9 @@ class CalendarsController < ApplicationController
   # POST /calendars or /calendars.json
   def create
     @calendar = Calendar.new(calendar_params)
-    @calendar.users = [ Current.user ]
+    @calendar.editors = [ Current.user ]
     authorize @calendar
+    debugger
 
     if @calendar.save
       redirect_to calendar_url(@calendar), notice: t(:calendar_created)

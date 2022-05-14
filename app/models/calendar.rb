@@ -3,8 +3,11 @@ class Calendar < ApplicationRecord
 
   has_many :slots, dependent: :destroy
 
+  has_many :calendar_assignations, dependent: :destroy
+  has_many :editors, through: :calendar_assignations, source: :user
+
   validates :name, presence: true
-  validates :users, presence: true
+  validates :editors, presence: true
   validates :advance_warning, numericality: :only_integer, presence: true
 
   def user

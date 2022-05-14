@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :slots, through: :bookings
 
+  has_many :calendar_assignations, dependent: :destroy
+  has_many :calendars, through: :calendar_assignations
+
   # adds virtual attributes for authentication
   has_secure_password
 
