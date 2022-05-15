@@ -4,3 +4,5 @@ en:
   calendar_updated: Calendar was successfully updated
   calendar_update_failed: Calendar update failed
   calendar_destroyed: Calendar was successfully destroyed
+  additional_editors: Additional editors
+  remove_editor: Remove editor

@@ -28,18 +28,6 @@
     <div>
       <%= button_to t(:add_slot), new_calendar_slot_path(calendar), method: :get %>
     </div>
-
-    <div>
-      <%= form_with(model: calendar) do |form| %>
-        <span>
-          <%= form.text_field :new_editors_email_list, value: 'List of emails' %>
-        </span>
-        <span>
-          <%= form.submit 'Add editor' %>
-        </span>
-      <% end %>
-    </div>
-
   <% end %>
 
   <% if calendar.description %>

@@ -21,12 +21,33 @@
     <%= form.text_area :description %>
   </div>
 
-    <div>
+  <div>
     <%= form.label :advance_warning, style: "display: block" %>
     <%= form.number_field :advance_warning %>
   </div>
 
   <div>
+    <%= form.label :new_editors_email_list, style: "display: block" %>
+    <%= form.text_field :new_editors_email_list %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
+<% end %>
+
+<% if calendar.editors.count > 1 %>
+  <h2>
+    <%= t(:additional_editors) %>
+  </h2>
+  <% calendar.editors.each do | editor | %>
+    <% next if editor == Current.user %>
+    <div>
+      <%= editor.name %>
+      <%= button_to 'Remove', calendar_calendar_assignation_path(
+        calendar,
+        CalendarAssignation.where(calendar: calendar, user: editor).first
+      ), method: :delete %>
+    </div>
+  <% end %>
 <% end %>
