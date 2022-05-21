@@ -2,20 +2,6 @@ class CalendarAssignationsController < ApplicationController
   before_action :set_calendar_assignation, only: %i[ edit update destroy ]
   before_action :set_calendar, except: :edit
 
-  # GET /calendar_assignations or /calendar_assignations.json
-  def index
-    @calendar_assignations = @calendar.calendar_assignations
-  end
-
-  # GET /calendar_assignations/new
-  def new
-    @calendar_assignation = @calendar.calendar_assignations.new
-  end
-
-  # GET /calendar_assignations/1/edit
-  def edit
-  end
-
   # POST /calendar_assignations or /calendar_assignations.json
   def create
     @calendar_assignation = @calendar.calendar_assignations.new(calendar_assignation_params)

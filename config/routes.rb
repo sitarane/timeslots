@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resource :users, only: [:new, :create, :update] # for now...
     resources :calendars do
       resources :slots, except: :index
-      resources :calendar_assignations, except: :show
+      resources :calendar_assignations, only: [:create, :destroy]
     end
     resource :sessions, only: [:new, :create, :destroy]
     resource :password, only: [:edit]
