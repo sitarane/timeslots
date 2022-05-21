@@ -35,7 +35,7 @@ class CalendarAssignationsController < ApplicationController
     @calendar_assignation.destroy
 
     respond_to do |format|
-      format.html { redirect_to calendar_url(@calendar), notice: "Calendar assignation was successfully destroyed." }
+      format.html { redirect_to edit_calendar_url(@calendar), notice: "Calendar assignation was successfully destroyed." }
       format.json { head :no_content }
     end
   end

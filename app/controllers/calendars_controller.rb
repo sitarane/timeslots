@@ -41,18 +41,11 @@ class CalendarsController < ApplicationController
   # PATCH/PUT /calendars/1 or /calendars/1.json
   def update
     authorize @calendar
-    if calendar_params[:new_editors_email_list]
-      if add_editors
-        redirect_to calendar_url(@calendar), notice: t(:calendar_updated)
-      else
-        redirect_to calendar_url(@calendar), alert: t(:calendar_update_failed)
-      end
+    add_editors if calendar_params[:new_editors_email_list]
+    if @calendar.update(calendar_params.except(:new_editors_email_list))
+      redirect_to calendar_url(@calendar), notice: t(:calendar_updated)
     else
-      if @calendar.update(calendar_params)
-        redirect_to calendar_url(@calendar), notice: t(:calendar_updated)
-      else
-        render :edit, status: :unprocessable_entity
-      end
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -74,7 +67,8 @@ class CalendarsController < ApplicationController
 
     list_of_users = Array.new
     list_of_emails.each do |email|
-      list_of_users << User.find_by(email: email)
+      candidate = User.find_by(email: email)
+      list_of_users << candidate unless @calendar.editors.include?(candidate)
       #needs to handle users not being found
     end
     @calendar.editors << list_of_users

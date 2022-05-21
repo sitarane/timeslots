@@ -14,7 +14,10 @@ class TimezonesTest < ActionDispatch::IntegrationTest
       start_time: Time.now + 5.days }}
     @slot = Slot.last
     assert_equal "moskslot", @slot.description
+
+    # Change the zone
     Time.zone = "Berlin"
+    
     # Look at the calendar
     get calendar_url(@calendar, locale: :en)
     assert_select "a", text: I18n.l(@slot.start_time.in_time_zone(Time.zone), format: :time).to_s
