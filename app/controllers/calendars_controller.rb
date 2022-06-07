@@ -27,10 +27,11 @@ class CalendarsController < ApplicationController
 
   # POST /calendars or /calendars.json
   def create
-    @calendar = Calendar.new(calendar_params)
-    @calendar.editors = [ Current.user ]
+    @calendar = Calendar.new(calendar_params.except(:new_editors_email_list))
+    @calendar.editors << Current.user
     authorize @calendar
-
+    add_editors if calendar_params[:new_editors_email_list]
+    
     if @calendar.save
       redirect_to calendar_url(@calendar), notice: t(:calendar_created)
     else
