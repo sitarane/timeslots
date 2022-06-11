@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :calendars do
       resources :slots, except: :index
       resources :calendar_assignations, only: :destroy
+      resources :invitations
     end
     resource :sessions, only: [:new, :create, :destroy]
     resource :password, only: [:edit]

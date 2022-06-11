@@ -6,6 +6,9 @@ class Calendar < ApplicationRecord
   has_many :calendar_assignations, dependent: :destroy
   has_many :editors, through: :calendar_assignations, source: :user
 
+  has_many :invitations, dependent: :destroy
+  has_many :invitees, through: :invitations, source: :user
+
   validates :name, presence: true
   validates :editors, presence: true
   validates :advance_warning, numericality: :only_integer, presence: true
