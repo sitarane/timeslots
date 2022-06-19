@@ -6,3 +6,4 @@ en:
   calendar_destroyed: Calendar was successfully destroyed
   additional_editors: Additional editors
   remove_editor: Remove editor
+  public_calendar_html: This calendar is public. %{link}

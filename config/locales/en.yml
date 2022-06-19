@@ -34,6 +34,7 @@ en:
   slogan: Helps you fill your calendar
   hi: Hi
   save: Save
+  edit: Edit
   time:
     formats:
       datetime: "%Y-%m-%d %H:%M"

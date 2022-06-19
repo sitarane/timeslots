@@ -36,4 +36,10 @@
     </p>
   <% end %>
 
+  <% if calendar.public? %>
+    <p>
+      <%= t(:public_calendar_html, link: link_to( t(:edit), edit_calendar_path(calendar)) ) %>
+    </p>
+  <% end %>
+
 </div>
