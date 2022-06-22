@@ -35,6 +35,7 @@ en:
   hi: Hi
   save: Save
   edit: Edit
+  change: Change
   time:
     formats:
       datetime: "%Y-%m-%d %H:%M"

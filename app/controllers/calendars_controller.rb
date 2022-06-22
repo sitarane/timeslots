@@ -31,7 +31,7 @@ class CalendarsController < ApplicationController
     @calendar.editors << Current.user
     authorize @calendar
     add_editors if calendar_params[:new_editors_email_list]
-    
+
     if @calendar.save
       redirect_to calendar_url(@calendar), notice: t(:calendar_created)
     else
@@ -44,7 +44,7 @@ class CalendarsController < ApplicationController
     authorize @calendar
     add_editors if calendar_params[:new_editors_email_list]
     if @calendar.update(calendar_params.except(:new_editors_email_list))
-      redirect_to calendar_url(@calendar), notice: t(:calendar_updated)
+      redirect_to edit_calendar_url(@calendar), notice: t(:calendar_updated)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -85,6 +85,7 @@ class CalendarsController < ApplicationController
     params.require(:calendar).permit(
       :name,
       :description,
+      :public,
       :advance_warning,
       :new_editors_email_list)
   end
