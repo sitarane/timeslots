@@ -23,7 +23,7 @@ services:
   maildev:
     image: maildev/maildev
     ports:
-      - "1080:80"
+      - "1080:1080"
   test:
     image: rails_web
     volumes:

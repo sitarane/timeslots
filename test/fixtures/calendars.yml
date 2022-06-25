@@ -5,9 +5,18 @@ one:
   description: MyText
   editors: one
   advance_warning: 2
+  public: true
 
 two:
   name: MyString
   description: MyText
   editors: one, two
   advance_warning: 2
+  public: true
+
+private:
+  name: Private Calendar
+  description: A private calendar.
+  editors: one
+  advance_warning: 2
+  public: false

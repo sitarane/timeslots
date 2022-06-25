@@ -1,0 +1,7 @@
+en:
+  invitation_mailer_create_user_subject: >-
+    You have been invited to a private calendar
+  invitation_mailer_create_user_body: >-
+    An editor for the private %{calendar_name} calendar has invited you.
+    Since you don't have an account already, use the link below to
+    to create one.

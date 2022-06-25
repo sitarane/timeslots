@@ -1,6 +1,6 @@
 require "test_helper"
 
-class TimezonesTest < ActionDispatch::IntegrationTest
+class CalendarEditorsTest < ActionDispatch::IntegrationTest
   setup do
     @calendar = calendars(:one)
     @owner = users(:one)
@@ -17,7 +17,7 @@ class TimezonesTest < ActionDispatch::IntegrationTest
             new_editors_email_list: @candidate.email}
         }
     end
-    assert_redirected_to calendar_url(@calendar)
+    assert_redirected_to edit_calendar_url(@calendar)
     assert_equal I18n.t(:calendar_updated), flash[:notice]
   end
 
@@ -30,7 +30,7 @@ class TimezonesTest < ActionDispatch::IntegrationTest
           }
         }
     end
-    assert_redirected_to calendar_url(@calendar)
+    assert_redirected_to edit_calendar_url(@calendar)
     assert_equal I18n.t(:calendar_updated), flash[:notice]
   end
 

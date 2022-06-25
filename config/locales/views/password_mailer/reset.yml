@@ -1,3 +1,4 @@
 en:
   password_request_received: Someone requested a password reset.
   click_password_reset_link: Click this link if you recognise the activity, link expires in 15 minutes
+  password_mailer_subject_reset: Password reset

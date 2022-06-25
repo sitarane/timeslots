@@ -88,12 +88,12 @@ class CalendarsController < ApplicationController
     list_of_emails = emails.split(/[,\s]+/)
 
     list_of_emails.each do |email|
-      candidate = User.find_by(email: email)
-      if candidate
+      guest = User.find_by(email: email)
+      if guest
         @calendar.invitations << candidate
       else
         InvitationMailer.with(
-          user: candidate,
+          email: email,
           calendar: @calendar
         ).create_user.deliver_later
       end
