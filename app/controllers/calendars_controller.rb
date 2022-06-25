@@ -31,6 +31,7 @@ class CalendarsController < ApplicationController
     @calendar.editors << Current.user
     authorize @calendar
     add_editors if calendar_params[:new_editors_email_list]
+    invite_users if calendar_params[:new_invites_email_list]
 
     if @calendar.save
       redirect_to calendar_url(@calendar), notice: t(:calendar_created)
@@ -43,7 +44,11 @@ class CalendarsController < ApplicationController
   def update
     authorize @calendar
     add_editors if calendar_params[:new_editors_email_list]
-    if @calendar.update(calendar_params.except(:new_editors_email_list))
+    invite_users if calendar_params[:new_invites_email_list]
+    if @calendar.update(calendar_params.except(
+      :new_editors_email_list,
+      :new_invites_email_list
+    ))
       redirect_to edit_calendar_url(@calendar), notice: t(:calendar_updated)
     else
       render :edit, status: :unprocessable_entity
@@ -70,9 +75,29 @@ class CalendarsController < ApplicationController
     list_of_emails.each do |email|
       candidate = User.find_by(email: email)
       list_of_users << candidate unless @calendar.editors.include?(candidate)
-      #needs to handle users not being found
+      # needs to handle users not being found
+      # offer to create profile for emails not found?
     end
     @calendar.editors << list_of_users
+  end
+
+  def invite_users
+    emails = calendar_params[:new_invites_email_list]
+
+    # split at spaces and commas
+    list_of_emails = emails.split(/[,\s]+/)
+
+    list_of_emails.each do |email|
+      candidate = User.find_by(email: email)
+      if candidate
+        @calendar.invitations << candidate
+      else
+        InvitationMailer.with(
+          user: candidate,
+          calendar: @calendar
+        ).create_user.deliver_later
+      end
+    end
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -87,6 +112,7 @@ class CalendarsController < ApplicationController
       :description,
       :public,
       :advance_warning,
-      :new_editors_email_list)
+      :new_editors_email_list,
+      :new_invites_email_list)
   end
 end
