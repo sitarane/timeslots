@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :bookings, only: [:create, :update]
   get '/:locale', to: 'pages#home'
   root 'pages#home'
