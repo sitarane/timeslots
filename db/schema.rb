@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_14_094200) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_19_161452) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_14_094200) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "advance_warning", default: 0, null: false
+    t.boolean "public", default: true
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "calendar_id", null: false
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_invitations_on_calendar_id"
+    t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
   create_table "slots", force: :cascade do |t|
@@ -64,5 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_14_094200) do
   add_foreign_key "bookings", "users"
   add_foreign_key "calendar_assignations", "calendars"
   add_foreign_key "calendar_assignations", "users"
+  add_foreign_key "invitations", "calendars"
+  add_foreign_key "invitations", "users"
   add_foreign_key "slots", "calendars"
 end
