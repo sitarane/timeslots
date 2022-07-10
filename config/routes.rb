@@ -9,12 +9,12 @@ Rails.application.routes.draw do
       resources :slots, except: :index
       resources :calendar_assignations, only: :destroy
     end
-    resource :sessions, only: [:new, :create, :destroy]
-    resource :password, only: [:edit]
-    resource :password_reset, only: [:new, :edit, :update, :create]
+    # resource :sessions, only: [:new, :create, :destroy]
+    # resource :password, only: [:edit]
+    # resource :password_reset, only: [:new, :edit, :update, :create]
 
-    get 'signup', to: 'users#new'
-    get 'login', to: 'sessions#new'
-    get 'logout', to: 'sessions#destroy'
+    # get 'signup', to: 'users#new'
+    # get 'login', to: 'sessions#new'
+    # get 'logout', to: 'sessions#destroy'
   end
 end
