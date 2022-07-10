@@ -11,9 +11,10 @@ class CalendarInvitationsTest < ActionDispatch::IntegrationTest
 
   test 'Add user guest with no account' do
     assert_enqueued_email_with InvitationMailer,
-    :create_user, args: {
-      email: "not_a_user@email.com",
-      calendar: @calendar
+    :created_user, args: {
+      user: User.last,
+      calendar: @calendar,
+      token: Invitation.last.token
       } do
       patch calendar_url(@calendar), params: {
          calendar: {

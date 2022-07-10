@@ -17,6 +17,7 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - maildev
     env_file: .env
     stdin_open: true
     tty: true

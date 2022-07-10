@@ -1,0 +1,4 @@
+<h1><%= t(:hi) %>,</h1>
+<p><%= t(:invitation_mailer_created_user_body,
+  calendar_name: @calendar.name) %></p>
+<p><%= link_to nil, edit_users_url(@user, token: @token) %></p>

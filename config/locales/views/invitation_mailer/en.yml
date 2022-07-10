@@ -1,7 +1,11 @@
 en:
-  invitation_mailer_create_user_subject: >-
+  invitation_mailer_created_user_subject: >-
     You have been invited to a private calendar
-  invitation_mailer_create_user_body: >-
+  invitation_mailer_created_user_body: >-
     An editor for the private %{calendar_name} calendar has invited you.
-    Since you don't have an account already, use the link below to
-    to create one.
+    Since you don't have an account already, an account was created for you.
+    Use the link below to create a password for it.
+  invitation_mailer_invited_user_subject: >-
+    You now have access to a private calendar
+  invitation_mailer_invited_user_body_html: >-
+    You can now pick slots on %{calendar}.

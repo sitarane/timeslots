@@ -1,10 +1,15 @@
 class InvitationMailer < ApplicationMailer
-  def create_user
+  def created_user
     @calendar = params[:calendar]
-    mail to: params[:email],
-      subject: I18n.t(:invitation_mailer_create_user_subject)
+    @user = params[:user]
+    @token = params[:token]
+    mail to: @user.email,
+      subject: I18n.t(:invitation_mailer_created_user_subject)
   end
-  def invite_user
-
+  def invited_user
+    @calendar = params[:calendar]
+    @user = params[:user]
+    mail to: @user.email,
+      subject: I18n.t(:invitation_mailer_invited_user_subject)
   end
 end

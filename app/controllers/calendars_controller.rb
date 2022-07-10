@@ -90,12 +90,21 @@ class CalendarsController < ApplicationController
     list_of_emails.each do |email|
       guest = User.find_by(email: email)
       if guest
-        @calendar.invitations << candidate
-      else
+        Invitation.create(user: guest, calendar: @calendar)
         InvitationMailer.with(
-          email: email,
+          user: @user,
           calendar: @calendar
-        ).create_user.deliver_later
+        ).invited_user.deliver_later
+      else # no worky prolly cause password. Need devise
+        invitation = Invitation.create(user: @user, calendar: @calendar)
+        token = invitation.generate_token
+        @user = User.create(name: email, email: email, password: token)
+        # need to react to invalid email address
+        InvitationMailer.with(
+          user: @user,
+          calendar: @calendar,
+          token: token
+        ).created_user.deliver_later
       end
     end
   end
